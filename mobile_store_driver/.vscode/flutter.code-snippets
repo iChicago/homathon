@@ -1,0 +1,20 @@
+{
+    "Navigator Push": {
+        "prefix": "nav-push",
+        "body": [
+        "Navigator.push(context,",
+        "  MaterialPageRoute(",
+        "    builder: (context) => $1",
+        "  )",
+        ");"
+        ],
+        "description": "Push new page"
+    }, 
+    "Navigator Pop": {
+        "prefix": "nav-pop",
+        "body": [
+        "Navigator.pop(context);"
+        ],
+        "description": "Pop page"
+    }, 
+}
