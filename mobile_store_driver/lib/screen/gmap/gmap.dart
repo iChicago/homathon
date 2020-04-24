@@ -3,12 +3,12 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-
-import 'constants.dart';
-import 'orders.dart';
+import 'package:mobile_store_driver/constants.dart';
+import 'package:mobile_store_driver/model/customer/orders.dart';
 
 class GMap extends StatefulWidget {
   final Order order;
+
   GMap({Key key, this.order}) : super(key: key);
 
   @override
@@ -18,6 +18,7 @@ class GMap extends StatefulWidget {
 class _GMapState extends State<GMap> {
   bool _isStarted = false;
   Set<Marker> _markers = HashSet<Marker>();
+
   // Set<Polygon> _polygons = HashSet<Polygon>();
   // Set<Polyline> _polylines = HashSet<Polyline>();
   // Set<Circle> _circles = HashSet<Circle>();
@@ -151,7 +152,7 @@ class _GMapState extends State<GMap> {
   }
 
   bool _isNewOrder(String status) {
-    if (status == Constants.newOrders) {
+    if (status == Constants.STATUS_NEW) {
       return true;
     }
     return false;
@@ -171,7 +172,7 @@ class _GMapState extends State<GMap> {
             onPressed: () {
               setState(() {
                 _isStarted = !_isStarted;
-                widget.order.status = Constants.inProgressOrders;
+                widget.order.status = Constants.STATUS_IN_PROGRESS;
               });
             },
             color: Colors.blue,

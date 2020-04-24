@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
-import 'common_widgets.dart';
-import 'orders.dart';
+import 'package:mobile_store_driver/constants.dart';
+import 'package:mobile_store_driver/custom-component/h1.component.dart';
+import 'package:mobile_store_driver/model/customer/item.dart';
 
 class InventoryPage extends StatefulWidget {
   const InventoryPage({
@@ -15,28 +15,27 @@ class InventoryPage extends StatefulWidget {
 class _InventoryPageState extends State<InventoryPage> {
   static List<Item> backupItems = [
     Item(
-      itemName: 'Galaxy',
-      quantity: 20,
-      remaining: 10,
-    ),
-    Item(
       itemName: 'Lays',
       quantity: 10,
+      pricePerUnit: 15,
       remaining: 9,
     ),
     Item(
       itemName: 'Milk',
       quantity: 20,
+      pricePerUnit: 15,
       remaining: 12,
     ),
     Item(
       itemName: 'Onion',
       quantity: 10,
+      pricePerUnit: 15,
       remaining: 10,
     ),
     Item(
       itemName: 'Yoghurt',
       quantity: 15,
+      pricePerUnit: 15,
       remaining: 5,
     )
   ];
@@ -46,6 +45,7 @@ class _InventoryPageState extends State<InventoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.orange[900],
         title: Text('Inventory'),
         actions: <Widget>[
           Padding(
@@ -116,7 +116,7 @@ class _InventoryPageState extends State<InventoryPage> {
 
   void choiceAction(String choice) {
     setState(() {
-      if (choice == Constants.allOrders) {
+      if (choice == Constants.ALL_ORDERS) {
         items = backupItems;
       } else {
         items =

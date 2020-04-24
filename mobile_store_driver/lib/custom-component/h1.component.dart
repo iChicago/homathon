@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class H1 extends StatelessWidget {
   H1(this.title);
-  final String title;
+
+  String title;
 
   @override
   Widget build(BuildContext context) {

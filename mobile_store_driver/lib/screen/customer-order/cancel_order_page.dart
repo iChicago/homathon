@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_store_driver/constants.dart';
+import 'package:mobile_store_driver/model/customer/orders.dart';
+import 'package:mobile_store_driver/screen/customer-order/order.screen.dart';
 
-import 'constants.dart';
-import 'orders.dart';
+class CancleOrderPage extends StatelessWidget {
+  Order order;
 
-class CancleOrderPage extends StatefulWidget {
-  final Order order;
-  const CancleOrderPage({Key key, this.order}) : super(key: key);
-
-  @override
-  _CancleOrderPageState createState() => _CancleOrderPageState();
-}
-
-class _CancleOrderPageState extends State<CancleOrderPage> {
   @override
   Widget build(BuildContext context) {
+    this.order = ModalRoute.of(context).settings.arguments as Order;
     const List<String> cancellationReasons = [
       'Customer didn\'t respond',
       'Some items were damaged',
@@ -23,6 +18,7 @@ class _CancleOrderPageState extends State<CancleOrderPage> {
     ];
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.orange[900],
         title: Text('Cancellation reason'),
       ),
       body: Container(
@@ -37,8 +33,12 @@ class _CancleOrderPageState extends State<CancleOrderPage> {
                     child: ListTile(
                       title: Text(item),
                       onTap: () {
-                        widget.order.status = Constants.cancelledOrders;
-                        Navigator.pop(context);
+                        this.order.status = Constants.STATUS_CANCELLED;
+                        this.order.cancellationReason = item;
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => OrdersPage()));
                       },
                     ),
                   ),

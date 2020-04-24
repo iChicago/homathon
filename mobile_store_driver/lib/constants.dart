@@ -1,21 +1,20 @@
 class Constants {
-  static const String newOrders = 'New';
-  static const String inProgressOrders = 'In Progress';
-  static const String cancelledOrders = 'Cancelled';
-  static const String deliveredOrders = 'Delivered';
-  static const String allOrders = 'All';
+  static const String STATUS_NEW = 'New';
+  static const String STATUS_IN_PROGRESS = 'In Progress';
+  static const String STATUS_CANCELLED = 'Cancelled';
+  static const String STATUS_DELIVERED = 'Delivered';
+  static const String STATUS_APPROVED = 'Approved';
+  static const String ALL_ORDERS = 'All';
 
   static const List<String> choices = <String>[
-    newOrders,
-    inProgressOrders,
-    cancelledOrders,
-    deliveredOrders,
-    allOrders
+    STATUS_NEW,
+    STATUS_IN_PROGRESS,
+    STATUS_CANCELLED,
+    STATUS_DELIVERED,
+    ALL_ORDERS
   ];
 
-  static const String cancleOrder = 'Cancle';
-
-  static const List<String> orderDetailsChoices = <String>[cancleOrder];
+  static const List<String> orderDetailsChoices = <String>[STATUS_CANCELLED];
 
   static const String urgentRefill = 'High';
   static const String canWaitRefill = 'Medium';
