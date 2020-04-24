@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mobile_store_driver/inventory_page.dart';
 import 'package:mobile_store_driver/orders.dart';
 import 'package:mobile_store_driver/refil_reminder_page.dart';
 
@@ -38,7 +39,7 @@ class _OrdersPageState extends State<OrdersPage> {
         child: FaIcon(FontAwesomeIcons.store),
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => RefillReminderPage()));
+              MaterialPageRoute(builder: (context) => InventoryPage()));
         },
       ),
       appBar: AppBar(

@@ -19,11 +19,17 @@ class Order {
 }
 
 class Item {
-  Item({this.itemName, this.quantity, this.totalPrice, this.image});
+  Item(
+      {this.itemName,
+      this.quantity,
+      this.totalPrice,
+      this.image,
+      this.remaining});
   String itemName;
   int quantity;
   double totalPrice;
   Image image;
+  int remaining;
 }
 
 class Orders {
