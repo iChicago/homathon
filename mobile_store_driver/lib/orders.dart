@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobile_store_driver/constants.dart';
 
@@ -18,20 +19,56 @@ class Order {
 }
 
 class Item {
-  Item({this.itemName, this.quantity, this.totalPrice});
+  Item({this.itemName, this.quantity, this.totalPrice, this.image});
   String itemName;
   int quantity;
   double totalPrice;
+  Image image;
 }
 
 class Orders {
   List<Order> list = [];
   getOrders() {
-    Item item1 = Item(itemName: 'Item 1', quantity: 2, totalPrice: 3);
-    Item item2 = Item(itemName: 'Item 2', quantity: 3, totalPrice: 30);
-    Item item3 = Item(itemName: 'Item 3', quantity: 5, totalPrice: 77);
-    Item item4 = Item(itemName: 'Item 4', quantity: 10, totalPrice: 150);
-    Item item5 = Item(itemName: 'Item 5', quantity: 4, totalPrice: 89);
+    Item item1 = Item(
+      itemName: 'Galaxy',
+      quantity: 2,
+      totalPrice: 3,
+      image: Image(
+        image: AssetImage('assets/galaxy.jpg'),
+      ),
+    );
+    Item item2 = Item(
+      itemName: 'Lays',
+      quantity: 3,
+      totalPrice: 30,
+      image: Image(
+        image: AssetImage('assets/lays.jpg'),
+      ),
+    );
+    Item item3 = Item(
+      itemName: 'Milk',
+      quantity: 5,
+      totalPrice: 77,
+      image: Image(
+        image: AssetImage('assets/milk.jpg'),
+      ),
+    );
+    Item item4 = Item(
+      itemName: 'Onion',
+      quantity: 10,
+      totalPrice: 150,
+      image: Image(
+        image: AssetImage('assets/onion.jpg'),
+      ),
+    );
+    Item item5 = Item(
+      itemName: 'Yoghurt',
+      quantity: 4,
+      totalPrice: 89,
+      image: Image(
+        image: AssetImage('assets/yoghurt.jpg'),
+      ),
+    );
 
     Order first = Order(
         orderId: 1,

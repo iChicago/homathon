@@ -16,8 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.black,
       ),
-      home:
-          OrdersPage(), //GMap()//OrdersPage(orders: orders)//OrderDetailsPage(order: orders[0])
+      home: OrdersPage(),
     );
   }
 }

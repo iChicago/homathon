@@ -12,4 +12,8 @@ class Constants {
     deliveredOrders,
     allOrders
   ];
+
+  static const String cancleOrder = 'Cancle';
+
+  static const List<String> orderDetailsChoices = <String>[cancleOrder];
 }

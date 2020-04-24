@@ -184,8 +184,9 @@ class _GMapState extends State<GMap> {
           padding: EdgeInsets.symmetric(horizontal: 15),
           child: RaisedButton(
             shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(18.0),
-                side: BorderSide(color: Colors.blue)),
+              borderRadius: new BorderRadius.circular(18.0),
+              side: BorderSide(color: Colors.blue),
+            ),
             onPressed: () {
               Navigator.pop(context);
             },
