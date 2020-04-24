@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile_store_driver/model/driver/refill_order.dart';
-import 'package:mobile_store_driver/screen/supermarket/storekeeper_storeI_items_screen.dart';
+import 'package:mobile_store_driver/screen/supermarket/supermarket_order_items_details.dart';
 
-import '../../main.dart';
+import '../../constants.dart';
 import '../driver-orders/driver_orders.screen.dart';
 
 class SuperMarketOrdersPage extends StatelessWidget {
@@ -18,7 +18,8 @@ class SuperMarketOrdersPage extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: MyApp.DRIVER_APP_COLOR,
+            centerTitle: true,
+            backgroundColor: Constants.SUPERMARKET_APP_COLOR,
             leading: GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -26,8 +27,8 @@ class SuperMarketOrdersPage extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => DriverOrdersPage()));
               },
-              child: Icon(
-                Icons.home, // add custom icons also
+              child: Text('_',
+                style: TextStyle(height: 50),// add custom icons also
               ),
             ),
             bottom: TabBar(
@@ -63,42 +64,46 @@ class SuperMarketOrdersPage extends StatelessWidget {
       itemCount: orders.length,
       itemBuilder: (BuildContext context, int index) {
         final RefillOrder order = orders[index];
-        return Column(
-          children: <Widget>[
-            new ListTile(
-              dense: true,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => StoreKeeper(),
-                    settings: RouteSettings(arguments: order),
-                  ),
-                );
-              },
-              title: new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  new Text(
-                    'Order# ${order.orderId}',
-                    style: new TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
-                  new Text(
-                    order.status,
-                    style: new TextStyle(
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15.0),
-                  ),
-                ],
+        if (order != null) {
+          return Column(
+            children: <Widget>[
+              new ListTile(
+                dense: true,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => StoreKeeper(),
+                      settings: RouteSettings(arguments: order),
+                    ),
+                  );
+                },
+                title: new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    new Text(
+                      'Order# ${order.orderId}',
+                      style: new TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                    new Text(
+                      order.status,
+                      style: new TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.0),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Divider(
-              height: 10.0,
-            ),
-          ],
-        );
+              Divider(
+                height: 10.0,
+              ),
+            ],
+          );
+        } else {
+          return Container();
+        }
       },
     );
   }

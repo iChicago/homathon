@@ -6,8 +6,9 @@ import 'package:mobile_store_driver/screen/customer-order/order.screen.dart';
 import 'package:mobile_store_driver/screen/driver-orders/DriverApp_CreateStoreRequest.dart';
 import 'package:mobile_store_driver/screen/driver-orders/driver-order-details.screen.dart';
 import 'package:mobile_store_driver/screen/driver-orders/refill.screen.dart';
+import 'package:mobile_store_driver/screen/supermarket/supermarket_orders.dart';
 
-import '../../main.dart';
+import '../../constants.dart';
 
 class DriverOrdersPage extends StatelessWidget {
   static const String ROUTE_NAME = '/driver-orders';
@@ -20,7 +21,8 @@ class DriverOrdersPage extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: MyApp.DRIVER_APP_COLOR,
+            centerTitle: true,
+            backgroundColor: Constants.DRIVER_APP_COLOR,
             leading: GestureDetector(
               onTap: () {
                 Navigator.push(context,
@@ -48,6 +50,15 @@ class DriverOrdersPage extends StatelessWidget {
                 },
                 child: Icon(
                   Icons.notifications, // add custom icons also
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SuperMarketOrdersPage()));
+                },
+                child: Text('_',
+                  style: TextStyle(height: 50),// add custom icons also
                 ),
               )
             ],

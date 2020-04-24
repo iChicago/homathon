@@ -1,4 +1,8 @@
+import 'package:flutter/cupertino.dart';
+
 class Constants {
+  static const Color DRIVER_APP_COLOR = Color(0xfff8615a);
+  static const Color SUPERMARKET_APP_COLOR = Color(0xffb80d57);
   static const String STATUS_NEW = 'New';
   static const String STATUS_IN_PROGRESS = 'In Progress';
   static const String STATUS_CANCELLED = 'Cancelled';

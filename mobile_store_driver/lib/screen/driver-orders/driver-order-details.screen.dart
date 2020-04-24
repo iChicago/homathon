@@ -29,7 +29,7 @@ class DriverOrderDetailsPage extends StatelessWidget {
 
   AppBar buildAppBar(context) {
     return AppBar(
-      backgroundColor: MyApp.DRIVER_APP_COLOR,
+      backgroundColor: Constants.DRIVER_APP_COLOR,
       title: Text(
         'Order# ' + this.refillOrder.orderId.toString(),
         style: TextStyle(fontStyle: FontStyle.italic),

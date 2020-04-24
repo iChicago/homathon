@@ -47,7 +47,7 @@ class _InventoryPageState extends State<InventoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MyApp.DRIVER_APP_COLOR,
+        backgroundColor: Constants.DRIVER_APP_COLOR,
         title: Text('Inventory'),
         actions: <Widget>[
           Padding(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../constants.dart';
 import '../../main.dart';
 import 'driver_orders.screen.dart';
 
@@ -13,7 +14,7 @@ class SubmitDriverScreen extends StatelessWidget {
           'Publish Order',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: MyApp.DRIVER_APP_COLOR,
+        backgroundColor: Constants.DRIVER_APP_COLOR,
         iconTheme: IconThemeData(
           color: Colors.white,
         ),

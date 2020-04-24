@@ -24,7 +24,8 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
     this.order = ModalRoute.of(context).settings.arguments as Order;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MyApp.DRIVER_APP_COLOR,
+        centerTitle: true,
+        backgroundColor: Constants.DRIVER_APP_COLOR,
         title: Text('Order # ${order.orderId}'),
         actions: <Widget>[
           Padding(

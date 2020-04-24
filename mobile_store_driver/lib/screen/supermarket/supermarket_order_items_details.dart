@@ -3,8 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:mobile_store_driver/model/cart_item.dart';
 import 'package:mobile_store_driver/model/data_sample.dart';
-import 'package:mobile_store_driver/screen/supermarket/submit_store_screen.dart';
+import 'package:mobile_store_driver/screen/supermarket/submit_supermarket_order.dart';
 
+import '../../constants.dart';
+import '../../constants.dart';
 import '../../model/driver/refill_order.dart';
 import '../../model/driver/store_item.dart';
 
@@ -35,7 +37,7 @@ class _StoreKeeperState extends State<StoreKeeper> {
             'Store Items Request',
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: Color(0xff721b65),
+          backgroundColor: Constants.SUPERMARKET_APP_COLOR,
           centerTitle: true,
         ),
         body: ListView(children: getCartItems()));
@@ -59,142 +61,150 @@ class _StoreKeeperState extends State<StoreKeeper> {
 
   Widget getTotalWidget() {
     return Card(
-        color: Colors.white,
-        elevation: 1.0,
-        margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 2.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                'Total',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
+      color: Colors.white,
+      elevation: 1.0,
+      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 2.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Total',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),
+            ),
+            SizedBox(height: 20),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 7,
+                  child: Text(
+                    'Refrigerator Items',
+                    style: TextStyle(fontSize: 20, color: Colors.grey),
+                  ),
                 ),
-              ),
-              SizedBox(height: 20),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 7,
-                    child: Text(
-                      'Refrigerator Items',
-                      style: TextStyle(fontSize: 20, color: Colors.grey),
+                Expanded(
+                  flex: 3,
+                  child: Text(
+                    '5',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 7,
+                  child: Text(
+                    'Freezer Items',
+                    style: TextStyle(fontSize: 20, color: Colors.grey),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Text(
+                    '6',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 7,
+                  child: Text(
+                    'Room Temperature Items',
+                    style: TextStyle(fontSize: 20, color: Colors.grey),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Text(
+                    '30',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 7,
+                  child: Text(
+                    'Total Items',
+                    style: TextStyle(fontSize: 20, color: Colors.grey),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Text(
+                    totalItems.toString(),
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.grey,
                     ),
                   ),
-                  Expanded(
-                    flex: 3,
-                    child: Text(
-                      '5',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  )
-                ],
+                )
+              ],
+            ),
+            SizedBox(height: 20),
+            getAcceptButton(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget getAcceptButton(){
+    if(this.refillOrder.status == Constants.STATUS_IN_PROGRESS) {
+      return Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: RaisedButton.icon(
+              onPressed: () {
+                RefillOrder.approveOrder(this.refillOrder);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            SubmitStoreScreen()));
+              },
+              color: Color(0xffb80d57),
+              icon: Icon(
+                Icons.check_circle,
+                color: Colors.white,
               ),
-              SizedBox(
-                height: 5,
+              label: Text(
+                'Accept Store Request',
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 7,
-                    child: Text(
-                      'Freezer Items',
-                      style: TextStyle(fontSize: 20, color: Colors.grey),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Text(
-                      '6',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 7,
-                    child: Text(
-                      'Room Temperature Items',
-                      style: TextStyle(fontSize: 20, color: Colors.grey),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Text(
-                      '30',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 7,
-                    child: Text(
-                      'Total Items',
-                      style: TextStyle(fontSize: 20, color: Colors.grey),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Text(
-                      totalItems.toString(),
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: RaisedButton.icon(
-                      onPressed: () {
-                        RefillOrder.approveOrder(this.refillOrder);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    SubmitStoreScreen()));
-                      },
-                      color: Color(0xffb80d57),
-                      icon: Icon(
-                        Icons.check_circle,
-                        color: Colors.white,
-                      ),
-                      label: Text(
-                        'Accept Store Request',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-        ));
+            ),
+          )
+        ],
+      );
+    }
+    return new Container();
   }
 
   Widget getHeaderWidget() {

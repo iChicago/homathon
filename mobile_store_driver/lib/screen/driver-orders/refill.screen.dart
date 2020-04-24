@@ -3,6 +3,7 @@ import 'package:mobile_store_driver/model/cart_item.dart';
 import 'package:mobile_store_driver/model/data_sample.dart';
 import 'package:mobile_store_driver/screen/driver-orders/submit_driver_screen.dart';
 
+import '../../constants.dart';
 import '../../main.dart';
 import '../../model/driver/refill_order.dart';
 
@@ -291,7 +292,7 @@ class _RefillDriverScreenState extends State<RefillPage> {
           'Refill Order',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: MyApp.DRIVER_APP_COLOR,
+        backgroundColor: Constants.DRIVER_APP_COLOR,
         centerTitle: true,
       ),
       body: ListView(children: getCartItems()),

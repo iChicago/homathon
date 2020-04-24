@@ -20,7 +20,7 @@ class CancleOrderPage extends StatelessWidget {
     ];
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MyApp.DRIVER_APP_COLOR,
+        backgroundColor: Constants.DRIVER_APP_COLOR,
         title: Text('Cancellation reason'),
       ),
       body: Container(

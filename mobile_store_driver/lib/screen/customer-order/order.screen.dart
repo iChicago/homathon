@@ -45,7 +45,7 @@ class _OrdersPageState extends State<OrdersPage> {
         },
       ),
       appBar: AppBar(
-        backgroundColor: MyApp.DRIVER_APP_COLOR,
+        backgroundColor: Constants.DRIVER_APP_COLOR,
         title: Center(child: Text('Customers Orders')),
         leading: GestureDetector(
           child: Center(

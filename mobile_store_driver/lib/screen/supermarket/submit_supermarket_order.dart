@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_store_driver/screen/supermarket/supermarket_orders.screen.dart';
+import 'package:mobile_store_driver/screen/supermarket/supermarket_orders.dart';
+
+import '../../constants.dart';
 
 class SubmitStoreScreen extends StatelessWidget {
   @override
@@ -11,7 +13,7 @@ class SubmitStoreScreen extends StatelessWidget {
           'Accepted Order',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Color(0xff721b65),
+        backgroundColor: Constants.SUPERMARKET_APP_COLOR,
         iconTheme: IconThemeData(
           color: Colors.white, //change your color here
         ),
