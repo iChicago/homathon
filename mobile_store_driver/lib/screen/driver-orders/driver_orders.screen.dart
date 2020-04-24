@@ -6,6 +6,7 @@ import 'package:mobile_store_driver/screen/customer-order/order.screen.dart';
 import 'package:mobile_store_driver/screen/driver-orders/DriverApp_CreateStoreRequest.dart';
 import 'package:mobile_store_driver/screen/driver-orders/driver-order-details.screen.dart';
 import 'package:mobile_store_driver/screen/driver-orders/refill.screen.dart';
+import 'package:mobile_store_driver/screen/login_page.dart';
 import 'package:mobile_store_driver/screen/supermarket/supermarket_orders.dart';
 
 import '../../constants.dart';
@@ -55,7 +56,7 @@ class DriverOrdersPage extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SuperMarketOrdersPage()));
+                      MaterialPageRoute(builder: (context) => LoginPage()));
                 },
                 child: Text('_',
                   style: TextStyle(height: 50),// add custom icons also

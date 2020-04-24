@@ -10,7 +10,7 @@ import 'package:mobile_store_driver/screen/inventory/inventory_page.dart';
 import '../../main.dart';
 
 class OrdersPage extends StatefulWidget {
-  static const String ROUTE_NAME = '/home';
+  static const String ROUTE_NAME = '/driver_orders';
 
   const OrdersPage({Key key}) : super(key: key);
 

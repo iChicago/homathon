@@ -211,7 +211,7 @@ class _RefillDriverScreenState extends State<RefillPage> {
                 ? getRemoveButton(refilItem: refilItem)
                 : Container(),
             Expanded(
-              flex: 3,
+              flex: 4,
               child: MaterialButton(
                 minWidth: 60,
                 onPressed: () {
@@ -240,7 +240,7 @@ class _RefillDriverScreenState extends State<RefillPage> {
               ),
             ),
             Expanded(
-              flex: 3,
+              flex: 4,
               child: MaterialButton(
                 minWidth: 60,
                 onPressed: () {
@@ -266,7 +266,7 @@ class _RefillDriverScreenState extends State<RefillPage> {
 
   Widget getRemoveButton({CartItemModel refilItem}) {
     return Expanded(
-      flex: 3,
+      flex: 4,
       child: MaterialButton(
         minWidth: 60,
         onPressed: () {

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile_store_driver/model/driver/refill_order.dart';
+import 'package:mobile_store_driver/screen/login_page.dart';
 import 'package:mobile_store_driver/screen/supermarket/supermarket_order_items_details.dart';
 
 import '../../constants.dart';
@@ -22,10 +23,8 @@ class SuperMarketOrdersPage extends StatelessWidget {
             backgroundColor: Constants.SUPERMARKET_APP_COLOR,
             leading: GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DriverOrdersPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginPage()));
               },
               child: Text('_',
                 style: TextStyle(height: 50),// add custom icons also

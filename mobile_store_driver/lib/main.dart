@@ -4,6 +4,7 @@ import 'package:mobile_store_driver/screen/customer-order/order.screen.dart';
 import 'package:mobile_store_driver/screen/driver-orders/driver-order-details.screen.dart';
 import 'package:mobile_store_driver/screen/driver-orders/driver_orders.screen.dart';
 import 'package:mobile_store_driver/screen/driver-orders/refill.screen.dart';
+import 'package:mobile_store_driver/screen/login_page.dart';
 import 'package:mobile_store_driver/screen/supermarket/supermarket_orders.dart';
 
 import 'constants.dart';
@@ -18,8 +19,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primaryColor: Constants.DRIVER_APP_COLOR),
       debugShowCheckedModeBanner: false,
-      home: DriverOrdersPage(),
+      home: LoginPage(),
       routes: {
+        LoginPage.ROUTE_NAME: (context) => LoginPage(),
         OrdersPage.ROUTE_NAME: (context) => OrdersPage(),
         OrderDetailsPage.ROUTE_NAME: (context) => OrderDetailsPage(),
         RefillPage.ROUTE_NAME: (context) => RefillPage(),
