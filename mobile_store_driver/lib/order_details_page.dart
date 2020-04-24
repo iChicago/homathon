@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mobile_store_driver/cancel_order_page.dart';
 import 'package:mobile_store_driver/gmap.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'constants.dart';
@@ -233,7 +234,11 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
   void choiceAction(String choice) {
     if (choice == Constants.cancleOrder) {
       setState(() {
-        widget.order.status = Constants.cancelledOrders;
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CancleOrderPage(order: widget.order)));
+        //widget.order.status = Constants.cancelledOrders;
       });
     }
   }

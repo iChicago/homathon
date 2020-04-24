@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 
-class CancleOrderPage extends StatelessWidget {
-  const CancleOrderPage({Key key}) : super(key: key);
+import 'constants.dart';
+import 'orders.dart';
 
+class CancleOrderPage extends StatefulWidget {
+  final Order order;
+  const CancleOrderPage({Key key, this.order}) : super(key: key);
+
+  @override
+  _CancleOrderPageState createState() => _CancleOrderPageState();
+}
+
+class _CancleOrderPageState extends State<CancleOrderPage> {
   @override
   Widget build(BuildContext context) {
     const List<String> cancellationReasons = [
@@ -28,6 +37,7 @@ class CancleOrderPage extends StatelessWidget {
                     child: ListTile(
                       title: Text(item),
                       onTap: () {
+                        widget.order.status = Constants.cancelledOrders;
                         Navigator.pop(context);
                       },
                     ),
