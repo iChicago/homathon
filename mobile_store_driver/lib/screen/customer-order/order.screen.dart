@@ -2,12 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile_store_driver/constants.dart';
-import 'package:mobile_store_driver/model/customer/orders.dart';
+import 'package:mobile_store_driver/model/customer/order.dart';
 import 'package:mobile_store_driver/screen/customer-order/order-details.screen.dart';
 import 'package:mobile_store_driver/screen/driver-orders/driver_orders.screen.dart';
 import 'package:mobile_store_driver/screen/inventory/inventory_page.dart';
-
-import '../../main.dart';
 
 class OrdersPage extends StatefulWidget {
   static const String ROUTE_NAME = '/driver_orders';
@@ -19,7 +17,7 @@ class OrdersPage extends StatefulWidget {
 }
 
 class _OrdersPageState extends State<OrdersPage> {
-  List<Order> backupOrders = Order.getOrders(15);
+  List<Order> backupOrders = Order.list;
   List<Order> orders;
 
   _OrdersPageState() {
@@ -98,49 +96,56 @@ class _OrdersPageState extends State<OrdersPage> {
       body: ListView.builder(
         itemCount: orders.length,
         itemBuilder: (BuildContext context, int index) {
-          return Column(
-            children: <Widget>[
-              new ListTile(
-                dense: true,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => OrderDetailsPage(),
-                      settings: RouteSettings(arguments: orders[index]),
-                    ),
-                  );
-                },
-                title: new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    new Text(
-                      'Order# ${orders[index].orderId}',
-                      style: new TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    new Text(
-                      '${orders[index].distance} km',
-                      style: new TextStyle(color: Colors.black, fontSize: 14.0),
-                    ),
-                  ],
-                ),
-                subtitle: new Container(
-                  padding: const EdgeInsets.only(top: 5.0),
-                  child: new Text(
-                    orders[index].status,
-                    style: new TextStyle(color: Colors.green, fontSize: 15.0),
-                  ),
-                ),
-              ),
-              Divider(
-                height: 10.0,
-              ),
-            ],
-          );
+          return getItemListTile(index);
         },
       ),
     );
+  }
+
+  Widget getItemListTile(index) {
+    if (orders.isNotEmpty) {
+      return Column(
+        children: <Widget>[
+          new ListTile(
+            dense: true,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => OrderDetailsPage(),
+                  settings: RouteSettings(arguments: orders[index]),
+                ),
+              );
+            },
+            title: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                new Text(
+                  'Order# ${orders[index].orderId}',
+                  style:
+                  new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                new Text(
+                  '${orders[index].distance} km',
+                  style: new TextStyle(color: Colors.black, fontSize: 14.0),
+                ),
+              ],
+            ),
+            subtitle: new Container(
+              padding: const EdgeInsets.only(top: 5.0),
+              child: new Text(
+                orders[index].status,
+                style: new TextStyle(color: Colors.green, fontSize: 15.0),
+              ),
+            ),
+          ),
+          Divider(
+            height: 10.0,
+          ),
+        ],
+      );
+    }
+    return Container();
   }
 
   void choiceAction(String choice) {

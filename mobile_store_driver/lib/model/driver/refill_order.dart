@@ -104,10 +104,12 @@ class RefillOrder {
   }
 
   static void approveOrder(RefillOrder refillOrder) {
-    refillOrder.supplier = Supplier.createDummySupplier(isStore: refillOrder.isStore);
+    refillOrder.supplier =
+        Supplier.createDummySupplier(isStore: refillOrder.isStore);
     refillOrder.availabilityTime = DateTime.now();
-    refillOrder.supplierRemarks =
-    refillOrder.isStore ? 'We are open until 9 PM' : 'Conside calling before arrival';
+    refillOrder.supplierRemarks = refillOrder.isStore
+        ? 'We are open until 9 PM'
+        : 'Conside calling before arrival';
     refillOrder.status = Constants.STATUS_APPROVED;
   }
 }

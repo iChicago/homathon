@@ -6,7 +6,6 @@ import 'package:mobile_store_driver/screen/login_page.dart';
 import 'package:mobile_store_driver/screen/supermarket/supermarket_order_items_details.dart';
 
 import '../../constants.dart';
-import '../driver-orders/driver_orders.screen.dart';
 
 class SuperMarketOrdersPage extends StatelessWidget {
   static const String ROUTE_NAME = '/supermarket-orders';
@@ -26,8 +25,9 @@ class SuperMarketOrdersPage extends StatelessWidget {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => LoginPage()));
               },
-              child: Text('_',
-                style: TextStyle(height: 50),// add custom icons also
+              child: Text(
+                '_',
+                style: TextStyle(height: 50), // add custom icons also
               ),
             ),
             bottom: TabBar(

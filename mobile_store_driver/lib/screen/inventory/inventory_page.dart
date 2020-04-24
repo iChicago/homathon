@@ -3,8 +3,6 @@ import 'package:mobile_store_driver/constants.dart';
 import 'package:mobile_store_driver/custom-component/h1.component.dart';
 import 'package:mobile_store_driver/model/customer/item.dart';
 
-import '../../main.dart';
-
 class InventoryPage extends StatefulWidget {
   const InventoryPage({
     Key key,

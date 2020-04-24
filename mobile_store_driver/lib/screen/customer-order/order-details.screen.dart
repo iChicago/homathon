@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile_store_driver/constants.dart';
 import 'package:mobile_store_driver/custom-component/h1.component.dart';
-import 'package:mobile_store_driver/model/customer/orders.dart';
+import 'package:mobile_store_driver/model/customer/order.dart';
 import 'package:mobile_store_driver/screen/customer-order/cancel_order_page.dart';
 import 'package:mobile_store_driver/screen/gmap/gmap.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../main.dart';
 
 class OrderDetailsPage extends StatefulWidget {
   static const String ROUTE_NAME = '/order-details';
@@ -102,7 +100,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text('Items price'),
-                          Text(order.orderTotal.toString() + ' SR'),
+                          Text(order.itemsTotal.toString() + ' SR'),
                         ],
                       ),
                       Divider(),
@@ -110,8 +108,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text('VAT 5%'),
-                          Text((order.orderTotal * 0.05).toStringAsFixed(2) +
-                              ' SR'),
+                          Text((order.vatTotal).toStringAsFixed(2) + ' SR'),
                         ],
                       ),
                       Divider(),
@@ -135,7 +132,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            ((order.orderTotal * 0.05) + order.orderTotal + 10)
+                            ((order.itemsTotal * 0.05) + order.itemsTotal + 10)
                                     .toStringAsFixed(2) +
                                 ' SR',
                             style: TextStyle(fontWeight: FontWeight.bold),

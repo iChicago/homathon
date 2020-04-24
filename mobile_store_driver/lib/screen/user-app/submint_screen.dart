@@ -1,22 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_store_driver/model/customer/order.dart';
+import 'package:mobile_store_driver/screen/user-app/index.dart';
 
-import '../../constants.dart';
-import 'driver_orders.screen.dart';
+class SubmintScreen extends StatelessWidget {
+  SubmintScreen({this.order});
 
-class SubmitDriverScreen extends StatelessWidget {
+  Order order;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Publish Order',
+          'Submint Order',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Constants.DRIVER_APP_COLOR,
+        backgroundColor: Color(0xff721b65),
         iconTheme: IconThemeData(
           color: Colors.white,
         ),
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          HomeScreen(title: 'Goot')));
+            },
+            child: Icon(Icons.home, color: Colors.white)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -37,7 +49,7 @@ class SubmitDriverScreen extends StatelessWidget {
                       height: 15,
                     ),
                     Text(
-                      "Order #10024445",
+                      "Order# ${order.orderId}",
                       style: TextStyle(
                         color: Color(0xffb80d57),
                       ),
@@ -46,7 +58,7 @@ class SubmitDriverScreen extends StatelessWidget {
                       height: 15,
                     ),
                     Text(
-                      "You can track your order in Orders screen.",
+                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 14.0,
@@ -59,19 +71,18 @@ class SubmitDriverScreen extends StatelessWidget {
                       height: 50,
                     ),
                     RaisedButton(
-                      color: Color(0xffb80d57),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    DriverOrdersPage()));
-                      },
-                      child: Text(
-                        "Done",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    )
+                        color: Color(0xffb80d57),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      TrackScreen()));
+                        },
+                        child: Text(
+                          "Track",
+                          style: TextStyle(color: Colors.white),
+                        ))
                   ],
                 ),
               ),

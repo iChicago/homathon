@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_store_driver/screen/supermarket/supermarket_orders.dart';
+import 'package:mobile_store_driver/screen/user-app/home_screen.dart';
 
 import 'driver-orders/driver_orders.screen.dart';
 
@@ -60,7 +61,12 @@ class _LoginPageState extends State<LoginPage> {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => HomeScreen(title: 'Goot')));
+        },
         child: Text("Login as Customer",
             textAlign: TextAlign.center,
             style: style.copyWith(

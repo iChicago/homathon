@@ -7,7 +7,6 @@ import 'package:mobile_store_driver/screen/driver-orders/DriverApp_CreateStoreRe
 import 'package:mobile_store_driver/screen/driver-orders/driver-order-details.screen.dart';
 import 'package:mobile_store_driver/screen/driver-orders/refill.screen.dart';
 import 'package:mobile_store_driver/screen/login_page.dart';
-import 'package:mobile_store_driver/screen/supermarket/supermarket_orders.dart';
 
 import '../../constants.dart';
 
@@ -58,8 +57,9 @@ class DriverOrdersPage extends StatelessWidget {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginPage()));
                 },
-                child: Text('_',
-                  style: TextStyle(height: 50),// add custom icons also
+                child: Text(
+                  '_',
+                  style: TextStyle(height: 50), // add custom icons also
                 ),
               )
             ],

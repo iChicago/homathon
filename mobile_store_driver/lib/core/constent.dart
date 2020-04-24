@@ -1,19 +1,16 @@
-//import 'package:mobile_store_driver/Model/model_index.dart';
-
-import 'package:mobile_store_driver/model/cart_item.dart';
-import 'package:mobile_store_driver/model/product.dart';
+import 'package:mobile_store_driver/Model/model_index.dart';
 
 class DataSample {
-//  static final List<Category> category = [
-//    Category(index: 0, name: "All"),
-//    Category(index: 1, name: "Bread"),
-//    Category(index: 2, name: "Egg"),
-//    Category(index: 3, name: "Dairy"),
-//    Category(index: 4, name: "Fruits"),
-//    Category(index: 5, name: "Vegetables"),
-//    Category(index: 6, name: "Chocolates"),
-//    Category(index: 7, name: "Snacks"),
-//  ];
+  static final List<Category> category = [
+    Category(index: 0, name: "All"),
+    Category(index: 1, name: "Bread"),
+    Category(index: 2, name: "Egg"),
+    Category(index: 3, name: "Dairy"),
+    Category(index: 4, name: "Fruits"),
+    Category(index: 5, name: "Vegetables"),
+    Category(index: 6, name: "Chocolates"),
+    Category(index: 7, name: "Snacks"),
+  ];
 
   static final List<Product> cart = [];
   static final List<CartItemModel> cartItems = [];
@@ -45,7 +42,7 @@ class DataSample {
         stock: 50,
         moreInfo:
             "Box Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        image: 'assets/images/egg.jpg'),
+        image: 'assets/egg.jpg'),
     Product(
         code: 2,
         name: 'Bread',
@@ -53,8 +50,8 @@ class DataSample {
         price: 5,
         stock: 50,
         moreInfo:
-        "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        image: 'assets/images/bread.png'),
+            "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        image: 'assets/bread.png'),
     Product(
         code: 3,
         name: 'Cucumber',
@@ -62,8 +59,8 @@ class DataSample {
         price: 8,
         stock: 40,
         moreInfo:
-        "Kg Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        image: 'assets/images/cucumber.jpg'),
+            "Kg Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        image: 'assets/cucumber.jpg'),
     Product(
         code: 4,
         name: 'Milk',
@@ -71,8 +68,8 @@ class DataSample {
         price: 10,
         stock: 80,
         moreInfo:
-        "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        image: 'assets/images/milk.jpg'),
+            "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        image: 'assets/milk.jpg'),
     Product(
         code: 5,
         name: 'Milk 1',
@@ -80,8 +77,8 @@ class DataSample {
         price: 10,
         stock: 80,
         moreInfo:
-        "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        image: 'assets/images/milk1.png'),
+            "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        image: 'assets/milk1.png'),
     Product(
         code: 6,
         name: 'Milk 2',
@@ -89,8 +86,8 @@ class DataSample {
         price: 10,
         stock: 80,
         moreInfo:
-        "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        image: 'assets/images/milk2.jpg'),
+            "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        image: 'assets/milk2.jpg'),
     Product(
         code: 7,
         name: 'Tomatoes',
@@ -98,8 +95,8 @@ class DataSample {
         price: 25,
         stock: 40,
         moreInfo:
-        "Kg Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        image: 'assets/images/tomatoes.jpg'),
+            "Kg Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        image: 'assets/tomatoes.jpg'),
     Product(
         code: 8,
         name: 'cheese',
@@ -107,8 +104,8 @@ class DataSample {
         price: 10,
         stock: 80,
         moreInfo:
-        "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        image: 'assets/images/cheese1.jpg'),
+            "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        image: 'assets/cheese1.jpg'),
     Product(
         code: 9,
         name: 'cheese',
@@ -116,8 +113,8 @@ class DataSample {
         price: 10,
         stock: 80,
         moreInfo:
-        "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        image: 'assets/images/chees.jpg'),
+            "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        image: 'assets/chees.jpg'),
     Product(
         code: 10,
         name: 'cheese',
@@ -125,8 +122,8 @@ class DataSample {
         price: 10,
         stock: 80,
         moreInfo:
-        "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        image: 'assets/images/cheese1.jpg'),
+            "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        image: 'assets/cheese1.jpg'),
     Product(
         code: 11,
         name: 'Potatos',
@@ -134,8 +131,8 @@ class DataSample {
         price: 12,
         stock: 4,
         moreInfo:
-        "Kg Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        image: 'assets/images/potatos.jpg'),
+            "Kg Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        image: 'assets/potatos.jpg'),
   ];
 }
 

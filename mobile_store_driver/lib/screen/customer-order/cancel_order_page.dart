@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_store_driver/constants.dart';
-import 'package:mobile_store_driver/model/customer/orders.dart';
+import 'package:mobile_store_driver/model/customer/order.dart';
 import 'package:mobile_store_driver/screen/customer-order/order.screen.dart';
-
-import '../../main.dart';
 
 class CancleOrderPage extends StatelessWidget {
   Order order;

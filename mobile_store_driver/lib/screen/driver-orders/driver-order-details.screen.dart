@@ -6,7 +6,6 @@ import 'package:mobile_store_driver/custom-component/status_component.dart';
 import 'package:mobile_store_driver/model/driver/refill_order.dart';
 
 import '../../constants.dart';
-import '../../main.dart';
 
 class DriverOrderDetailsPage extends StatelessWidget {
   static const String ROUTE_NAME = '/refill-order-details';
@@ -39,14 +38,18 @@ class DriverOrderDetailsPage extends StatelessWidget {
   }
 
   SingleChildScrollView buildBody(context) {
-    bool isStatusInPorgress = this.refillOrder.status == Constants.STATUS_IN_PROGRESS;
+    bool isStatusInPorgress =
+        this.refillOrder.status == Constants.STATUS_IN_PROGRESS;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              StatusWidget(status: this.refillOrder.status, statusColor:  isStatusInPorgress? Colors.yellow[800]: Colors.green),
+              StatusWidget(
+                  status: this.refillOrder.status,
+                  statusColor:
+                      isStatusInPorgress ? Colors.yellow[800] : Colors.green),
               SizedBox(
                 height: 8,
               ),
@@ -73,26 +76,30 @@ class DriverOrderDetailsPage extends StatelessWidget {
   Column buildItemsCards() {
     List<Card> itemsCards = refillOrder.storeItems
         .map((item) => new Card(
-              margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
-              color: Colors.green[50],
-              child: Row(children: [
-                Expanded(
-                  flex: 8,
-                  child: Text(item.itemName,
-                      textAlign: TextAlign.left,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: CircleAvatar(
-                    radius: 10,
-                    child: Text(item.storeQuantity.toString(),
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    backgroundColor: Colors.white,
-                  ),
-                ),
-              ]),
+      elevation: 1.0,
+      margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+      color: Colors.white,
+      child: Row(children: [
+        Expanded(
+          flex: 8,
+          child: Text(item.itemName,
+              textAlign: TextAlign.left,
+              style:
+              TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+        ),
+        Expanded(
+          flex: 2,
+          child: CircleAvatar(
+            radius: 15,
+            child: Text(item.storeQuantity.toString(),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                )),
+            backgroundColor: Colors.white,
+          ),
+        ),
+      ]),
             ))
         .toList();
     return Column(children: itemsCards);

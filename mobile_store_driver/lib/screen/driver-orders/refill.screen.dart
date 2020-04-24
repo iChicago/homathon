@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:mobile_store_driver/model/cart_item.dart';
 import 'package:mobile_store_driver/model/data_sample.dart';
 import 'package:mobile_store_driver/screen/driver-orders/submit_driver_screen.dart';
 
 import '../../constants.dart';
-import '../../main.dart';
 import '../../model/driver/refill_order.dart';
 
 class RefillPage extends StatefulWidget {
@@ -119,7 +119,8 @@ class _RefillDriverScreenState extends State<RefillPage> {
                     flex: 1,
                     child: RaisedButton.icon(
                       onPressed: () {
-                        RefillOrder.createRefillOrder(DataSample.refilItems, totalItems);
+                        RefillOrder.createRefillOrder(
+                            DataSample.refilItems, totalItems);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -164,101 +165,112 @@ class _RefillDriverScreenState extends State<RefillPage> {
   }
 
   Widget getItemCard({CartItemModel refilItem}) {
-    return Card(
-      elevation: 1.0,
-      color: Colors.white,
-      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              flex: 0,
-              child: CircleAvatar(
-                backgroundImage: AssetImage(refilItem.product.image),
-                radius: 20,
+    return Dismissible(
+      key: GlobalKey<FormBuilderState>(),
+      background: Container(
+        alignment: Alignment.centerLeft,
+        color: Color(0xffb80d57),
+        child: Icon(Icons.delete, color: Colors.white),
+      ),
+      onDismissed: (direction) {
+        setState(() {
+          deleteCartItem(refilItem);
+        });
+      },
+      child: Card(
+        elevation: 1.0,
+        color: Colors.white,
+        margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                flex: 0,
+                child: CircleAvatar(
+                  backgroundImage: AssetImage(refilItem.product.image),
+                  radius: 20,
+                ),
               ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              flex: 10,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    refilItem.product.name,
-                    style: TextStyle(
-                      color: Colors.grey[700],
-                      fontSize: 20,
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                flex: 10,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      refilItem.product.name,
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 20,
+                      ),
                     ),
+                    Text(
+                      'SR ${refilItem.product.price}',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xfff8615a),
+                          fontSize: 15,
+                          letterSpacing: 2,
+                          fontStyle: FontStyle.italic),
+                    )
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 3,
+                child: MaterialButton(
+                  minWidth: 60,
+                  onPressed: () {
+                    setState(() {
+                      if (refilItem.quantity == 1) {
+                        deleteCartItem(refilItem);
+                      }
+                      removeFromCart(refilItrm: refilItem);
+                    });
+                  },
+                  color: Colors.grey[200],
+                  child: Icon(
+                      refilItem.quantity > 1 ? Icons.remove : Icons.delete,
+                      size: 25,
+                      color: Colors.grey),
+                  shape: CircleBorder(),
+                ),
+              ),
+              Expanded(
+                flex: 0,
+                child: Text(
+                  refilItem.quantity.toString(),
+                  style: TextStyle(
+                    fontSize: 20,
                   ),
-                  Text(
-                    'SR ${refilItem.product.price}',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xfff8615a),
-                        fontSize: 15,
-                        letterSpacing: 2,
-                        fontStyle: FontStyle.italic),
-                  )
-                ],
-              ),
-            ),
-            refilItem.quantity > 1
-                ? getRemoveButton(refilItem: refilItem)
-                : Container(),
-            Expanded(
-              flex: 4,
-              child: MaterialButton(
-                minWidth: 60,
-                onPressed: () {
-                  setState(() {
-                    if (refilItem.quantity == 1) {
-                      deleteCartItem(refilItem);
-                    }
-                    removeFromCart(refilItrm: refilItem);
-                  });
-                },
-                color: Colors.grey[200],
-                child: Icon(
-                    refilItem.quantity > 1 ? Icons.remove : Icons.delete,
-                    size: 25,
-                    color: Colors.grey),
-                shape: CircleBorder(),
-              ),
-            ),
-            Expanded(
-              flex: 0,
-              child: Text(
-                refilItem.quantity.toString(),
-                style: TextStyle(
-                  fontSize: 20,
                 ),
               ),
-            ),
-            Expanded(
-              flex: 4,
-              child: MaterialButton(
-                minWidth: 60,
-                onPressed: () {
-                  setState(() {
-                    refilItem.quantity++;
-                    addToCart(refilItrm: refilItem);
-                  });
-                },
-                color: Color(0xffb80d57),
-                child: Icon(
-                  Icons.add,
-                  size: 20,
-                  color: Colors.white,
+              Expanded(
+                flex: 3,
+                child: MaterialButton(
+                  minWidth: 60,
+                  onPressed: () {
+                    setState(() {
+                      refilItem.quantity++;
+                      addToCart(refilItrm: refilItem);
+                    });
+                  },
+                  color: Color(0xffb80d57),
+                  child: Icon(
+                    Icons.add,
+                    size: 20,
+                    color: Colors.white,
+                  ),
+                  shape: CircleBorder(),
                 ),
-                shape: CircleBorder(),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

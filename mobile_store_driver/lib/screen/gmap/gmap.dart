@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:mobile_store_driver/constants.dart';
-import 'package:mobile_store_driver/model/customer/orders.dart';
+import 'package:mobile_store_driver/model/customer/order.dart';
 
 class GMap extends StatefulWidget {
   final Order order;

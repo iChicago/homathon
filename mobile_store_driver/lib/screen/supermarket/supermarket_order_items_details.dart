@@ -6,9 +6,7 @@ import 'package:mobile_store_driver/model/data_sample.dart';
 import 'package:mobile_store_driver/screen/supermarket/submit_supermarket_order.dart';
 
 import '../../constants.dart';
-import '../../constants.dart';
 import '../../model/driver/refill_order.dart';
-import '../../model/driver/store_item.dart';
 
 class StoreKeeper extends StatefulWidget {
   @override
@@ -50,7 +48,7 @@ class _StoreKeeperState extends State<StoreKeeper> {
     widgets.add(getHeaderWidget());
 
     // Cart Items
-    refillOrder.storeItems
+    DataSample.storeKeeper
         .forEach((item) => widgets.add(getItemCard(cartItem: item)));
 
     // Total Widget
@@ -172,8 +170,8 @@ class _StoreKeeperState extends State<StoreKeeper> {
     );
   }
 
-  Widget getAcceptButton(){
-    if(this.refillOrder.status == Constants.STATUS_IN_PROGRESS) {
+  Widget getAcceptButton() {
+    if (this.refillOrder.status == Constants.STATUS_IN_PROGRESS) {
       return Row(
         children: [
           Expanded(
@@ -262,7 +260,7 @@ class _StoreKeeperState extends State<StoreKeeper> {
     DataSample.storeKeeper.remove(cartItem);
   }
 
-  Widget getItemCard({StoreItem cartItem}) {
+  Widget getItemCard({CartItemModel cartItem}) {
     return Card(
       color: Colors.white,
       elevation: 1.0,
@@ -275,7 +273,7 @@ class _StoreKeeperState extends State<StoreKeeper> {
           Expanded(
             flex: 0,
             child: CircleAvatar(
-              backgroundImage: cartItem.image,
+              backgroundImage: AssetImage(cartItem.product.image),
               radius: 20,
             ),
           ),
@@ -288,7 +286,7 @@ class _StoreKeeperState extends State<StoreKeeper> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  cartItem.itemName,
+                  cartItem.product.name,
                   style: TextStyle(
                     color: Colors.grey[700],
                     fontSize: 20,
@@ -300,7 +298,7 @@ class _StoreKeeperState extends State<StoreKeeper> {
           Expanded(
             flex: 2,
             child: Text(
-              cartItem.storeQuantity.toString(),
+              cartItem.quantity.toString(),
               style: TextStyle(
                 fontSize: 20,
               ),
