@@ -187,7 +187,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => GMap(
-                              latLng: widget.order.latLng,
+                              order: widget.order,
                             ),
                           ),
                         );
@@ -233,12 +233,9 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
 
   void choiceAction(String choice) {
     if (choice == Constants.cancleOrder) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => CancleOrderPage(),
-        ),
-      );
+      setState(() {
+        widget.order.status = Constants.cancelledOrders;
+      });
     }
   }
 

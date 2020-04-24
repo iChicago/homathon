@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
+import 'constants.dart';
+import 'orders.dart';
+
 class GMap extends StatefulWidget {
-  final LatLng latLng;
-  GMap({Key key, this.latLng}) : super(key: key);
+  final Order order;
+  GMap({Key key, this.order}) : super(key: key);
 
   @override
   _GMapState createState() => _GMapState();
@@ -110,7 +113,7 @@ class _GMapState extends State<GMap> {
       _markers.add(
         Marker(
           markerId: MarkerId("0"),
-          position: widget.latLng,
+          position: widget.order.latLng,
           infoWindow: InfoWindow(
             title: "Elm Company",
             snippet: "😍😍",
@@ -128,7 +131,7 @@ class _GMapState extends State<GMap> {
           GoogleMap(
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(
-              target: widget.latLng,
+              target: widget.order.latLng,
               zoom: 14,
             ),
             markers: _markers,
@@ -139,12 +142,19 @@ class _GMapState extends State<GMap> {
             myLocationButtonEnabled: true,
             zoomControlsEnabled: false,
           ),
-          _isStarted
-              ? _showEndAndCancleButtons(context)
-              : _showStartDeliveryButton(context)
+          _isNewOrder(widget.order.status)
+              ? _showStartDeliveryButton(context)
+              : _showEndAndCancleButtons(context)
         ],
       ),
     );
+  }
+
+  bool _isNewOrder(String status) {
+    if (status == Constants.newOrders) {
+      return true;
+    }
+    return false;
   }
 
   Widget _showStartDeliveryButton(BuildContext context) {
@@ -161,6 +171,7 @@ class _GMapState extends State<GMap> {
             onPressed: () {
               setState(() {
                 _isStarted = !_isStarted;
+                widget.order.status = Constants.inProgressOrders;
               });
             },
             color: Colors.blue,
