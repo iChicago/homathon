@@ -3,6 +3,8 @@ import 'package:mobile_store_driver/constants.dart';
 import 'package:mobile_store_driver/custom-component/h1.component.dart';
 import 'package:mobile_store_driver/model/customer/item.dart';
 
+import '../../main.dart';
+
 class InventoryPage extends StatefulWidget {
   const InventoryPage({
     Key key,
@@ -45,7 +47,7 @@ class _InventoryPageState extends State<InventoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange[900],
+        backgroundColor: MyApp.DRIVER_APP_COLOR,
         title: Text('Inventory'),
         actions: <Widget>[
           Padding(

@@ -1,105 +1,300 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mobile_store_driver/model/driver/store_item.dart';
+import 'package:mobile_store_driver/model/cart_item.dart';
+import 'package:mobile_store_driver/model/data_sample.dart';
+import 'package:mobile_store_driver/screen/driver-orders/submit_driver_screen.dart';
 
-class RefillPage extends StatelessWidget {
+import '../../main.dart';
+import '../../model/driver/refill_order.dart';
+
+class RefillPage extends StatefulWidget {
   static const String ROUTE_NAME = '/refill';
-  final List<StoreItem> itemsInLow = StoreItem.createDummyStoreItems();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: buildAppBar(),
-        body: Padding(
-          padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
+  _RefillDriverScreenState createState() => _RefillDriverScreenState();
+}
+
+class _RefillDriverScreenState extends State<RefillPage> {
+  double cartTotal = 0;
+  double totalValue = 0;
+  int totalItems = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Total items and value
+    for (int i = 0; i < DataSample.refilItems.length; i++) {
+      totalValue = totalValue +
+          (DataSample.refilItems[i].product.price *
+              DataSample.refilItems[i].quantity);
+      totalItems = totalItems + DataSample.refilItems[i].quantity;
+    }
+
+    DataSample.refilItems.forEach((item) =>
+        totalValue = totalValue + (item.product.price * item.quantity));
+  }
+
+  List<Widget> getCartItems() {
+    List<Widget> widgets = [];
+
+    // Cart Items
+    DataSample.refilItems
+        .forEach((item) => widgets.add(getItemCard(refilItem: item)));
+    widgets.add(getCartTotalWidget());
+    return widgets;
+  }
+
+  Widget getCartTotalWidget() {
+    return Card(
+        elevation: 1.0,
+        color: Colors.white,
+        margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(8.0, 8.0, 2.0, 2.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Your store is low in the following',
+                'Total',
                 style: TextStyle(
-                  color: Colors.red,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Color(0xff721b65)),
               ),
-              buildStoreItemsScrollView(),
-              buildRefillButton(),
+              SizedBox(height: 10),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 7,
+                    child: Text(
+                      'Total Items',
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Text(
+                      'SR $totalItems',
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Color(0xfff8615a),
+                          fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 7,
+                    child: Text(
+                      'Total Value',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Color(0xffb80d57)),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Text(
+                      'SR $totalValue',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Color(0xffb80d57),
+                          fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: RaisedButton.icon(
+                      onPressed: () {
+                        RefillOrder.createRefillOrder(DataSample.refilItems, totalItems);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    SubmitDriverScreen()));
+                      },
+                      color: Color(0xffb80d57),
+                      icon: Icon(
+                        Icons.cloud_upload,
+                        color: Colors.white,
+                      ),
+                      label: Text(
+                        'Publish Order',
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                    ),
+                  )
+                ],
+              )
             ],
           ),
         ));
   }
 
-  SingleChildScrollView buildStoreItemsScrollView() {
-    return SingleChildScrollView(
+  addToCart({CartItemModel refilItrm}) {
+    totalValue = totalValue + refilItrm.product.price;
+    totalItems++;
+    refilItrm.quantity++;
+  }
+
+  removeFromCart({CartItemModel refilItrm}) {
+    totalValue = totalValue - refilItrm.product.price;
+    totalItems--;
+    refilItrm.quantity--;
+  }
+
+  deleteCartItem(CartItemModel refilItrm) {
+    totalValue = totalValue - (refilItrm.product.price * refilItrm.quantity);
+    totalItems = totalItems - refilItrm.quantity;
+    refilItrm.quantity = 0;
+    DataSample.refilItems.remove(refilItrm);
+  }
+
+  Widget getItemCard({CartItemModel refilItem}) {
+    return Card(
+      elevation: 1.0,
+      color: Colors.white,
+      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
-        child: Column(children: <Widget>[
-          buildStoreItemsCards(),
-          SizedBox(
-            height: 8,
-          )
-        ]),
-      ),
-    );
-  }
-
-  Column buildStoreItemsCards() {
-    List<Card> itemsCards = itemsInLow
-        .map((item) => new Card(
-              color: Colors.green[50],
-              child: ListTile(
-                leading: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white,
-                  backgroundImage: NetworkImage(
-                      'https://api.flutter.dev/flutter/static-assets/favicon.png'),
-                ),
-                title: Text(item.itemName,
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                trailing: Text(item.storeQuantity.toString(),
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              flex: 0,
+              child: CircleAvatar(
+                backgroundImage: AssetImage(refilItem.product.image),
+                radius: 20,
               ),
-            ))
-        .toList();
-    return Column(children: itemsCards);
-  }
-
-  AppBar buildAppBar() {
-    return AppBar(
-//      backgroundColor: MyApp.APP_BAR_COLOR,
-      title: Text(
-        'Refill Stock',
-        style: TextStyle(fontStyle: FontStyle.italic),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              flex: 10,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    refilItem.product.name,
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontSize: 20,
+                    ),
+                  ),
+                  Text(
+                    'SR ${refilItem.product.price}',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xfff8615a),
+                        fontSize: 15,
+                        letterSpacing: 2,
+                        fontStyle: FontStyle.italic),
+                  )
+                ],
+              ),
+            ),
+            refilItem.quantity > 1
+                ? getRemoveButton(refilItem: refilItem)
+                : Container(),
+            Expanded(
+              flex: 3,
+              child: MaterialButton(
+                minWidth: 60,
+                onPressed: () {
+                  setState(() {
+                    if (refilItem.quantity == 1) {
+                      deleteCartItem(refilItem);
+                    }
+                    removeFromCart(refilItrm: refilItem);
+                  });
+                },
+                color: Colors.grey[200],
+                child: Icon(
+                    refilItem.quantity > 1 ? Icons.remove : Icons.delete,
+                    size: 25,
+                    color: Colors.grey),
+                shape: CircleBorder(),
+              ),
+            ),
+            Expanded(
+              flex: 0,
+              child: Text(
+                refilItem.quantity.toString(),
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 3,
+              child: MaterialButton(
+                minWidth: 60,
+                onPressed: () {
+                  setState(() {
+                    refilItem.quantity++;
+                    addToCart(refilItrm: refilItem);
+                  });
+                },
+                color: Color(0xffb80d57),
+                child: Icon(
+                  Icons.add,
+                  size: 20,
+                  color: Colors.white,
+                ),
+                shape: CircleBorder(),
+              ),
+            ),
+          ],
+        ),
       ),
-      leading: Center(child: BackButton()),
-      actions: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(right: 15.0),
-          child: Center(child: FaIcon(FontAwesomeIcons.ellipsisH)),
-        )
-      ],
     );
   }
 
-  SizedBox buildRefillButton() {
-    return SizedBox(
-      width: double.infinity,
-      child: RaisedButton.icon(
-        onPressed: () {},
-        color: Colors.green,
-        icon: Icon(
-          Icons.add,
-        ),
-        label: Text(
-          'Request to fill',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 25,
-          ),
-        ),
+  Widget getRemoveButton({CartItemModel refilItem}) {
+    return Expanded(
+      flex: 3,
+      child: MaterialButton(
+        minWidth: 60,
+        onPressed: () {
+          setState(() {
+            deleteCartItem(refilItem);
+          });
+        },
+        color: Colors.grey[200],
+        child: Icon(Icons.delete, size: 25, color: Colors.grey),
+        shape: CircleBorder(),
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+        title: Text(
+          'Refill Order',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: MyApp.DRIVER_APP_COLOR,
+        centerTitle: true,
+      ),
+      body: ListView(children: getCartItems()),
     );
   }
 }

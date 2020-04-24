@@ -2,15 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class StatusWidget extends StatelessWidget {
-  StatusWidget({this.status, this.cancellationReason = null});
+  StatusWidget(
+      {this.status,
+      this.statusColor = Colors.green,
+      this.cancellationReason = null});
 
   final String status;
   final String cancellationReason;
+  final Color statusColor;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.greenAccent,
+      elevation: 1.0,
+      color: Colors.white,
       margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
       child: Padding(
         padding: EdgeInsets.fromLTRB(8.0, 8.0, 2.0, 2.0),
@@ -35,6 +40,7 @@ class StatusWidget extends StatelessWidget {
                     this.status,
                     style: TextStyle(
                       fontSize: 15,
+                      color: this.statusColor,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

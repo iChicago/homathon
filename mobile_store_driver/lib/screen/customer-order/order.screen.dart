@@ -7,6 +7,8 @@ import 'package:mobile_store_driver/screen/customer-order/order-details.screen.d
 import 'package:mobile_store_driver/screen/driver-orders/driver_orders.screen.dart';
 import 'package:mobile_store_driver/screen/inventory/inventory_page.dart';
 
+import '../../main.dart';
+
 class OrdersPage extends StatefulWidget {
   static const String ROUTE_NAME = '/home';
 
@@ -43,7 +45,7 @@ class _OrdersPageState extends State<OrdersPage> {
         },
       ),
       appBar: AppBar(
-        backgroundColor: Colors.orange[900],
+        backgroundColor: MyApp.DRIVER_APP_COLOR,
         title: Center(child: Text('Customers Orders')),
         leading: GestureDetector(
           child: Center(

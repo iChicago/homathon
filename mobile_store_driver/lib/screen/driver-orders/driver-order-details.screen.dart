@@ -5,6 +5,9 @@ import 'package:mobile_store_driver/constants.dart';
 import 'package:mobile_store_driver/custom-component/status_component.dart';
 import 'package:mobile_store_driver/model/driver/refill_order.dart';
 
+import '../../constants.dart';
+import '../../main.dart';
+
 class DriverOrderDetailsPage extends StatelessWidget {
   static const String ROUTE_NAME = '/refill-order-details';
 
@@ -26,7 +29,7 @@ class DriverOrderDetailsPage extends StatelessWidget {
 
   AppBar buildAppBar(context) {
     return AppBar(
-      backgroundColor: Colors.orange[900],
+      backgroundColor: MyApp.DRIVER_APP_COLOR,
       title: Text(
         'Order# ' + this.refillOrder.orderId.toString(),
         style: TextStyle(fontStyle: FontStyle.italic),
@@ -36,13 +39,14 @@ class DriverOrderDetailsPage extends StatelessWidget {
   }
 
   SingleChildScrollView buildBody(context) {
+    bool isStatusInPorgress = this.refillOrder.status == Constants.STATUS_IN_PROGRESS;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              StatusWidget(status: this.refillOrder.status),
+              StatusWidget(status: this.refillOrder.status, statusColor:  isStatusInPorgress? Colors.yellow[800]: Colors.green),
               SizedBox(
                 height: 8,
               ),

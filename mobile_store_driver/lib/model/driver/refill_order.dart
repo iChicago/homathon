@@ -1,12 +1,14 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:mobile_store_driver/constants.dart';
+import 'package:mobile_store_driver/model/cart_item.dart';
 import 'package:mobile_store_driver/model/driver/store_item.dart';
 import 'package:mobile_store_driver/model/driver/supplier.dart';
 import 'package:mobile_store_driver/screen/driver-orders/DriverApp_CreateStoreRequest.dart';
 
 class RefillOrder {
-  static final List<RefillOrder> list = [];
+  static final List<RefillOrder> driverRefillOrders = [];
   static RefillOrder todayStoreOrder;
 
   static createTodayStoreOrder(List<CartItem> cartItems, int totalItems) {
@@ -21,11 +23,31 @@ class RefillOrder {
       StoreItem storeItem = StoreItem(
           itemName: cartItem.name,
           storeQuantity: cartItem.quantity,
-          icon: cartItem.image);
+          image: cartItem.image);
       todayStoreOrder.storeItems.add(storeItem);
     });
     todayStoreOrder.itemsTotal = totalItems;
     todayStoreOrder.status = Constants.STATUS_IN_PROGRESS;
+  }
+
+  static createRefillOrder(List<CartItemModel> cartItems, int totalItems) {
+    RefillOrder refillOrder = RefillOrder(
+      orderId: Random().nextInt(100),
+      status: Random().nextBool()
+          ? Constants.STATUS_APPROVED
+          : Constants.STATUS_IN_PROGRESS,
+      isStore: false,
+    );
+    cartItems.forEach((cartItem) {
+      StoreItem storeItem = StoreItem(
+          itemName: cartItem.product.name,
+          storeQuantity: cartItem.quantity,
+          image: AssetImage(cartItem.product.image));
+      refillOrder.storeItems.add(storeItem);
+    });
+    refillOrder.itemsTotal = totalItems;
+    refillOrder.status = Constants.STATUS_IN_PROGRESS;
+    driverRefillOrders.add(refillOrder);
   }
 
   RefillOrder(
@@ -54,12 +76,12 @@ class RefillOrder {
   }
 
   static getRefillOrders(numberOfOrders, {bool isStore = false}) {
-    if (list.isEmpty) {
+    if (driverRefillOrders.isEmpty) {
       for (int i = 0; i < numberOfOrders; i++) {
-        list.add(createDummyRefillOrder(isStore));
+        driverRefillOrders.add(createDummyRefillOrder(isStore));
       }
     }
-    return list;
+    return driverRefillOrders;
   }
 
   static RefillOrder createDummyRefillOrder(bool isStore) {
@@ -79,5 +101,13 @@ class RefillOrder {
           isStore ? 'We are open until 9 PM' : 'Conside calling before arrival';
     }
     return randomOrder;
+  }
+
+  static void approveOrder(RefillOrder refillOrder) {
+    refillOrder.supplier = Supplier.createDummySupplier(isStore: refillOrder.isStore);
+    refillOrder.availabilityTime = DateTime.now();
+    refillOrder.supplierRemarks =
+    refillOrder.isStore ? 'We are open until 9 PM' : 'Conside calling before arrival';
+    refillOrder.status = Constants.STATUS_APPROVED;
   }
 }

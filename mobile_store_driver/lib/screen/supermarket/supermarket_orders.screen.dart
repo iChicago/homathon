@@ -2,15 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile_store_driver/model/driver/refill_order.dart';
-import 'package:mobile_store_driver/screen/customer-order/order.screen.dart';
-import 'package:mobile_store_driver/screen/driver-orders/DriverApp_CreateStoreRequest.dart';
-import 'package:mobile_store_driver/screen/driver-orders/driver-order-details.screen.dart';
-import 'package:mobile_store_driver/screen/driver-orders/refill.screen.dart';
+import 'package:mobile_store_driver/screen/supermarket/storekeeper_storeI_items_screen.dart';
 
 import '../../main.dart';
+import '../driver-orders/driver_orders.screen.dart';
 
-class DriverOrdersPage extends StatelessWidget {
-  static const String ROUTE_NAME = '/driver-orders';
+class SuperMarketOrdersPage extends StatelessWidget {
+  static const String ROUTE_NAME = '/supermarket-orders';
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +21,13 @@ class DriverOrdersPage extends StatelessWidget {
             backgroundColor: MyApp.DRIVER_APP_COLOR,
             leading: GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => OrdersPage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DriverOrdersPage()));
               },
               child: Icon(
-                Icons.reorder, // add custom icons also
+                Icons.home, // add custom icons also
               ),
             ),
             bottom: TabBar(
@@ -40,25 +40,11 @@ class DriverOrdersPage extends StatelessWidget {
               ],
             ),
             title: Text('My Orders'),
-            actions: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => RefillPage()));
-                },
-                child: Icon(
-                  Icons.notifications, // add custom icons also
-                ),
-              )
-            ],
           ),
           body: TabBarView(
             children: [
               buildRefillOrdersListView(false),
-              RefillOrder.todayStoreOrder == null
-                  ? MyCart()
-                  : DriverOrderDetailsPage(
-                      refillOrder: RefillOrder.todayStoreOrder),
+              buildRefillOrdersListView(true),
             ],
           ),
         ),
@@ -66,8 +52,13 @@ class DriverOrdersPage extends StatelessWidget {
     );
   }
 
-  static ListView buildRefillOrdersListView(isStore) {
-    List<RefillOrder> orders = RefillOrder.driverRefillOrders;
+  ListView buildRefillOrdersListView(isStore) {
+    List<RefillOrder> orders;
+    if (isStore) {
+      orders = [RefillOrder.todayStoreOrder];
+    } else {
+      orders = RefillOrder.driverRefillOrders;
+    }
     return ListView.builder(
       itemCount: orders.length,
       itemBuilder: (BuildContext context, int index) {
@@ -80,7 +71,7 @@ class DriverOrdersPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DriverOrderDetailsPage(),
+                    builder: (context) => StoreKeeper(),
                     settings: RouteSettings(arguments: order),
                   ),
                 );

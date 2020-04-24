@@ -3,6 +3,8 @@ import 'package:mobile_store_driver/constants.dart';
 import 'package:mobile_store_driver/model/customer/orders.dart';
 import 'package:mobile_store_driver/screen/customer-order/order.screen.dart';
 
+import '../../main.dart';
+
 class CancleOrderPage extends StatelessWidget {
   Order order;
 
@@ -18,7 +20,7 @@ class CancleOrderPage extends StatelessWidget {
     ];
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange[900],
+        backgroundColor: MyApp.DRIVER_APP_COLOR,
         title: Text('Cancellation reason'),
       ),
       body: Container(

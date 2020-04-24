@@ -20,11 +20,11 @@ const ITEMS = [
 ];
 
 class StoreItem {
-  StoreItem({this.itemName, this.storeQuantity, this.icon});
+  StoreItem({this.itemName, this.storeQuantity, this.image});
 
   String itemName;
   int storeQuantity;
-  AssetImage icon;
+  AssetImage image;
 
   static List<StoreItem> createDummyStoreItems() {
     List<StoreItem> list = [];
@@ -33,7 +33,7 @@ class StoreItem {
       StoreItem storeItem = StoreItem(
           itemName: ITEMS[i],
           storeQuantity: new Random().nextInt(20),
-          icon: null);
+          image: null);
       list.add(storeItem);
     }
     return list;

@@ -7,6 +7,8 @@ import 'package:mobile_store_driver/screen/customer-order/cancel_order_page.dart
 import 'package:mobile_store_driver/screen/gmap/gmap.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../main.dart';
+
 class OrderDetailsPage extends StatefulWidget {
   static const String ROUTE_NAME = '/order-details';
 
@@ -22,6 +24,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
     this.order = ModalRoute.of(context).settings.arguments as Order;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: MyApp.DRIVER_APP_COLOR,
         title: Text('Order # ${order.orderId}'),
         actions: <Widget>[
           Padding(
