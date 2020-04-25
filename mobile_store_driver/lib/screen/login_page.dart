@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_store_driver/screen/supermarket/supermarket_orders.dart';
 import 'package:mobile_store_driver/screen/user-app/home_screen.dart';
-
+import 'customer-order/order.screen.dart';
 import 'driver-orders/driver_orders.screen.dart';
 
 class LoginPage extends StatefulWidget {
@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => DriverOrdersPage()));
+              MaterialPageRoute(builder: (context) => OrdersPage()));
         },
         child: Text("Login as Driver",
             textAlign: TextAlign.center,
