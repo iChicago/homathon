@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:mobile_store_driver/custom-component/no-data-found.dart';
 import 'package:mobile_store_driver/model/cart_model.dart';
 import 'package:mobile_store_driver/model/data_sample.dart';
 import 'package:mobile_store_driver/screen/driver-orders/submit_driver_screen.dart';
@@ -24,21 +25,31 @@ class _RefillDriverScreenState extends State<RefillPage> {
     super.initState();
 
     // Total items and value
-    for (int i = 0; i < DataSample.refilItems.length; i++) {
+    for (int i = 0; i < DataSample.itemsToBeRefilled.length; i++) {
       totalValue = totalValue +
-          (DataSample.refilItems[i].product.price *
-              DataSample.refilItems[i].quantity);
-      totalItems = totalItems + DataSample.refilItems[i].quantity;
+          (DataSample.itemsToBeRefilled[i].product.price *
+              DataSample.itemsToBeRefilled[i].quantity);
+      totalItems = totalItems + DataSample.itemsToBeRefilled[i].quantity;
     }
   }
 
   List<Widget> getCartItems() {
     List<Widget> widgets = [];
-
-    // Cart Items
-    DataSample.refilItems
-        .forEach((item) => widgets.add(getItemCard(refilItem: item)));
-    widgets.add(getCartTotalWidget());
+    var itemsToBeRefilled = DataSample.itemsToBeRefilled;
+    if (itemsToBeRefilled.isNotEmpty) {
+      // Cart Items
+      DataSample.itemsToBeRefilled
+          .forEach((item) => widgets.add(getItemCard(refilItem: item)));
+      widgets.add(getCartTotalWidget());
+    } else {
+      widgets.add(
+        new NoDataFound(
+          iconColor: Constants.DRIVER_APP_COLOR,
+          emptyTex: 'Your stock is fine',
+          icon: Icon(Icons.verified_user, color: Colors.green),
+        ),
+      );
+    }
     return widgets;
   }
 
@@ -118,7 +129,7 @@ class _RefillDriverScreenState extends State<RefillPage> {
                       onPressed: () {
                         RefillOrder createdRefillOrder =
                             RefillOrder.createRefillOrder(
-                                DataSample.refilItems, totalItems);
+                                DataSample.itemsToBeRefilled, totalItems);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -161,7 +172,7 @@ class _RefillDriverScreenState extends State<RefillPage> {
     totalValue = totalValue - (refilItrm.product.price * refilItrm.quantity);
     totalItems = totalItems - refilItrm.quantity;
     refilItrm.quantity = 0;
-    DataSample.refilItems.remove(refilItrm);
+    DataSample.itemsToBeRefilled.remove(refilItrm);
   }
 
   Widget getItemCard({CartItemModel refilItem}) {

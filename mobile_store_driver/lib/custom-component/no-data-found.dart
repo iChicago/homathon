@@ -2,10 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NoDataFound extends StatelessWidget {
-  NoDataFound({this.emptyTex = '', @required this.iconColor});
+  NoDataFound({this.emptyTex = '', @required this.iconColor, this.icon}) {
+    if (this.icon == null) {
+      this.icon = Icon(Icons.assistant, color: this.iconColor);
+    }
+  }
 
   String emptyTex;
   Color iconColor;
+  Icon icon;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,7 @@ class NoDataFound extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Icon(Icons.assistant, color: this.iconColor),
+                  this.icon,
                   SizedBox(
                     height: 30,
                   ),

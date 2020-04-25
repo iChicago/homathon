@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:mobile_store_driver/model/cart_model.dart';
+import 'package:mobile_store_driver/model/data_sample.dart';
 import 'package:mobile_store_driver/model/driver/refill_order.dart';
 import 'package:mobile_store_driver/screen/driver-orders/driver_orders.screen.dart';
 
@@ -10,45 +12,19 @@ class MyCart extends StatefulWidget {
 }
 
 class _MyCartState extends State<MyCart> {
-  List<CartItem> cartItems;
-  double totalValue = 0;
+  List<CartItemModel> cartItems;
   int totalItems = 0;
 
   @override
   void initState() {
     super.initState();
 
-    cartItems = [
-      CartItem(
-          name: 'Milk',
-          price: 4,
-          quantity: 5,
-          image: AssetImage('assets/images/milk.jpg')),
-      CartItem(
-          name: 'Saudia Ice Cream',
-          price: 7,
-          quantity: 6,
-          image: AssetImage('assets/images/icecream.jpg')),
-      CartItem(
-          name: 'Lays',
-          price: 1,
-          quantity: 15,
-          image: AssetImage('assets/images/lays.jpg')),
-      CartItem(
-          name: 'Onion',
-          price: 3,
-          quantity: 15,
-          image: AssetImage('assets/images/onion.jpg')),
-    ];
+    cartItems = DataSample.storeItems;
 
     // Total items and value
     for (int i = 0; i < cartItems.length; i++) {
-      totalValue = totalValue + (cartItems[i].price * cartItems[i].quantity);
       totalItems = totalItems + cartItems[i].quantity;
     }
-
-    cartItems.forEach(
-        (item) => {totalValue = totalValue + (item.price * item.quantity)});
   }
 
   List<Widget> getCartItems() {
@@ -257,26 +233,22 @@ class _MyCartState extends State<MyCart> {
         ));
   }
 
-  addToCart({CartItem cartItem}) {
-    totalValue = totalValue + cartItem.price;
+  addToCart({CartItemModel cartItem}) {
     totalItems++;
     cartItem.quantity++;
   }
 
-  removeFromCart({CartItem cartItem}) {
-    totalValue = totalValue - cartItem.price;
+  removeFromCart({CartItemModel cartItem}) {
     totalItems--;
     cartItem.quantity--;
   }
 
-  deleteCartItem(CartItem cartItem) {
-    totalValue = totalValue - (cartItem.price * cartItem.quantity);
+  deleteCartItem(CartItemModel cartItem) {
     totalItems = totalItems - cartItem.quantity;
-    cartItem.quantity = 0;
     cartItems.remove(cartItem);
   }
 
-  Widget getItemCard({CartItem cartItem}) {
+  Widget getItemCard({CartItemModel cartItem}) {
     return Card(
       elevation: 1.0,
       color: Colors.white,
@@ -291,7 +263,7 @@ class _MyCartState extends State<MyCart> {
             Expanded(
               flex: 0,
               child: CircleAvatar(
-                backgroundImage: cartItem.image,
+                backgroundImage: AssetImage(cartItem.product.image),
                 radius: 20,
               ),
             ),
@@ -304,7 +276,7 @@ class _MyCartState extends State<MyCart> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    cartItem.name,
+                    cartItem.product.name,
                     style: TextStyle(
                       color: Colors.grey[700],
                       fontSize: 20,
@@ -344,11 +316,11 @@ class _MyCartState extends State<MyCart> {
   }
 }
 
-class CartItem {
-  CartItem({this.name, this.price, this.quantity, this.image});
-
-  String name;
-  double price;
-  int quantity;
-  AssetImage image;
-}
+//class CartItem {
+//  CartItem({this.name, this.price, this.quantity, this.image});
+//
+//  String name;
+//  double price;
+//  int quantity;
+//  AssetImage image;
+//}

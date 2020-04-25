@@ -16,18 +16,39 @@ class DataSample {
   static double orderToral = 0;
   static final List<Product> cart = [];
   static final List<CartItemModel> cartItems = [];
-  static final List<CartItemModel> refilItems = [
-    CartItemModel(product: products[0], quantity: 3),
-    CartItemModel(product: products[1], quantity: 2),
-    CartItemModel(product: products[6], quantity: 10),
-    CartItemModel(product: products[4], quantity: 5),
-  ];
-  static final List<CartItemModel> refillItemsStore = [
-    CartItemModel(product: products[0], quantity: 3),
-    CartItemModel(product: products[1], quantity: 2),
-    CartItemModel(product: products[6], quantity: 10),
-    CartItemModel(product: products[4], quantity: 5),
-  ];
+
+  static List<CartItemModel> _requiredItems;
+
+  static List<CartItemModel> get itemsToBeRefilled {
+    _requiredItems = [];
+    var requiredProducts = products.where((i) => _isItemLow(i)).toList();
+    requiredProducts.forEach((product) => _requiredItems.add(
+          CartItemModel(
+            product: product,
+            quantity: product.stock - product.remaining,
+          ),
+        ));
+    return _requiredItems;
+  }
+
+  static List<CartItemModel> _storeItems;
+
+  static List<CartItemModel> get storeItems {
+    _requiredItems = [];
+    products.forEach((product) => _requiredItems.add(
+          CartItemModel(
+            product: product,
+            quantity: product.remaining,
+          ),
+        ));
+    return _requiredItems;
+  }
+
+  static bool _isItemLow(Product product) {
+    double percentage = product.remaining / product.stock;
+    return percentage < 0.5;
+  }
+
   static final List<CartItemModel> storeKeeper = [
     CartItemModel(product: products[0], quantity: 3),
     CartItemModel(product: products[1], quantity: 2),
@@ -41,8 +62,8 @@ class DataSample {
         name: 'Egg',
         category: 2,
         price: 20,
-        stock: 50,
-        remaining: 50,
+        stock: 10,
+        remaining: 10,
         moreInfo: "Sample infor about our product.",
         image: 'assets/images/egg.jpg'),
     Product(
@@ -50,8 +71,8 @@ class DataSample {
         name: 'Bread',
         category: 1,
         price: 5,
-        stock: 50,
-        remaining: 50,
+        stock: 10,
+        remaining: 10,
         moreInfo: "Sample infor about our product.",
         image: 'assets/images/bread.png'),
     Product(
@@ -59,8 +80,8 @@ class DataSample {
         name: 'Cucumber',
         category: 5,
         price: 8,
-        stock: 40,
-        remaining: 40,
+        stock: 10,
+        remaining: 10,
         moreInfo: "Sample infor about our product.",
         image: 'assets/images/cucumber.jpg'),
     Product(
@@ -68,8 +89,8 @@ class DataSample {
         name: 'Milk',
         category: 3,
         price: 10,
-        stock: 80,
-        remaining: 80,
+        stock: 10,
+        remaining: 10,
         moreInfo: "Sample infor about our product.",
         image: 'assets/images/milk.jpg'),
     Product(
@@ -77,8 +98,8 @@ class DataSample {
         name: 'Milk 1',
         category: 3,
         price: 10,
-        stock: 80,
-        remaining: 80,
+        stock: 10,
+        remaining: 10,
         moreInfo: "Sample infor about our product.",
         image: 'assets/images/milk1.png'),
     Product(
@@ -86,8 +107,8 @@ class DataSample {
         name: 'Milk 2',
         category: 3,
         price: 10,
-        stock: 80,
-        remaining: 80,
+        stock: 10,
+        remaining: 10,
         moreInfo: "Sample infor about our product.",
         image: 'assets/images/milk2.jpg'),
     Product(
@@ -95,8 +116,8 @@ class DataSample {
         name: 'Tomatoes',
         category: 5,
         price: 25,
-        stock: 40,
-        remaining: 40,
+        stock: 10,
+        remaining: 10,
         moreInfo: "Sample infor about our product.",
         image: 'assets/images/tomatoes.jpg'),
     Product(
@@ -104,8 +125,8 @@ class DataSample {
         name: 'cheese',
         category: 3,
         price: 10,
-        stock: 80,
-        remaining: 80,
+        stock: 10,
+        remaining: 10,
         moreInfo: "Sample infor about our product.",
         image: 'assets/images/cheese1.jpg'),
     Product(
@@ -113,8 +134,8 @@ class DataSample {
         name: 'cheese',
         category: 3,
         price: 10,
-        stock: 80,
-        remaining: 80,
+        stock: 10,
+        remaining: 10,
         moreInfo: "Sample infor about our product.",
         image: 'assets/images/chees.jpg'),
     Product(
@@ -122,8 +143,8 @@ class DataSample {
         name: 'cheese',
         category: 3,
         price: 10,
-        stock: 80,
-        remaining: 80,
+        stock: 10,
+        remaining: 10,
         moreInfo: "Sample infor about our product.",
         image: 'assets/images/cheese1.jpg'),
     Product(
@@ -131,8 +152,8 @@ class DataSample {
         name: 'Potatos',
         category: 5,
         price: 12,
-        stock: 4,
-        remaining: 4,
+        stock: 10,
+        remaining: 10,
         moreInfo: "Sample infor about our product.",
         image: 'assets/images/potatos.jpg'),
   ];
@@ -148,18 +169,19 @@ class CategoryName {
   static const chocolates = 6;
   static const snacks = 6;
 }
+
 /*
   static final List<Product> product = [
     Product(name: 'Egg', categoryc: 2, price: 20, stock: 50, moreInfo: "Box", image: 'assets/egg.jpg'),
     Product(name: 'Bread', categoryc: 1, price: 5, stock: 50,moreInfo: "pice", image: 'assets/bread.png'),
-    Product(name: 'Cucumber', categoryc: 5, price: 8, stock: 40, moreInfo: "Kg", image: 'assets/cucumber.jpg'),
-    Product(name: 'Milk', categoryc: 3, price: 10, stock: 80, moreInfo: "pice", image: 'assets/milk.jpg'),
-    Product(name: 'Milk 1', categoryc: 3, price: 10, stock: 80, moreInfo: "pice", image: 'assets/milk1.png'),
-    Product(name: 'Milk 2', categoryc: 3, price: 10, stock: 80, moreInfo: "pice", image: 'assets/milk2.jpg'),
-    Product(name: 'Tomatoes', categoryc: 5, price: 25, stock: 40, moreInfo: "Kg", image: 'assets/tomatoes.jpg'),
-    Product(name: 'cheese', categoryc: 3, price: 10, stock: 80, moreInfo: "pice", image: 'assets/cheese1.jpg'),
-    Product(name: 'cheese', categoryc: 3, price: 10, stock: 80, moreInfo: "pice", image: 'assets/chees.jpg'),
-    Product(name: 'cheese', categoryc: 3, price: 10, stock: 80, moreInfo: "pice", image: 'assets/cheese1.jpg'),
+    Product(name: 'Cucumber', categoryc: 5, price: 8, stock: 10, moreInfo: "Kg", image: 'assets/cucumber.jpg'),
+    Product(name: 'Milk', categoryc: 3, price: 10, stock: 10, moreInfo: "pice", image: 'assets/milk.jpg'),
+    Product(name: 'Milk 1', categoryc: 3, price: 10, stock: 10, moreInfo: "pice", image: 'assets/milk1.png'),
+    Product(name: 'Milk 2', categoryc: 3, price: 10, stock: 10, moreInfo: "pice", image: 'assets/milk2.jpg'),
+    Product(name: 'Tomatoes', categoryc: 5, price: 25, stock: 10, moreInfo: "Kg", image: 'assets/tomatoes.jpg'),
+    Product(name: 'cheese', categoryc: 3, price: 10, stock: 10, moreInfo: "pice", image: 'assets/cheese1.jpg'),
+    Product(name: 'cheese', categoryc: 3, price: 10, stock: 10, moreInfo: "pice", image: 'assets/chees.jpg'),
+    Product(name: 'cheese', categoryc: 3, price: 10, stock: 10, moreInfo: "pice", image: 'assets/cheese1.jpg'),
     Product(name: 'Potatos', categoryc: 5, price: 12, stock: 4, moreInfo: "Kg", image: 'assets/potatos.jpg'),
   ];
 

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile_store_driver/custom-component/no-data-found.dart';
+import 'package:mobile_store_driver/model/data_sample.dart';
 import 'package:mobile_store_driver/model/driver/refill_order.dart';
 import 'package:mobile_store_driver/screen/customer-order/order.screen.dart';
 import 'package:mobile_store_driver/screen/driver-orders/DriverApp_CreateStoreRequest.dart';
@@ -46,15 +47,7 @@ class DriverOrdersPage extends StatelessWidget {
             ),
             title: Text('My Orders'),
             actions: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => RefillPage()));
-                },
-                child: Icon(
-                  Icons.notifications, // add custom icons also
-                ),
-              ),
+              _viewNotificationIcon(context),
               GestureDetector(
                 onTap: () {
                   Navigator.push(context,
@@ -150,5 +143,57 @@ class DriverOrdersPage extends StatelessWidget {
         },
       );
     }
+  }
+
+  Widget _viewNotificationIcon(context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => RefillPage()));
+      },
+      child: Container(
+//        width: 30,
+//        height: 30,
+        child: Stack(
+          children: [
+            Icon(
+              Icons.notifications,
+//            color: Colors.black,
+              size: 30,
+            ),
+            viewNotificationCount(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container viewNotificationCount() {
+    if (DataSample.itemsToBeRefilled.isEmpty) {
+      return Container();
+    }
+    return Container(
+      width: 30,
+      height: 30,
+      alignment: Alignment.topRight,
+      margin: EdgeInsets.only(top: 5),
+      child: Container(
+        width: 15,
+        height: 15,
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.blue,
+            border: Border.all(color: Colors.white, width: 1)),
+        child: Padding(
+          padding: const EdgeInsets.all(0.0),
+          child: Center(
+            child: Text(
+              '1',
+              style: TextStyle(fontSize: 10),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

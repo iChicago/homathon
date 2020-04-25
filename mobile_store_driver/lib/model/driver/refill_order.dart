@@ -5,13 +5,12 @@ import 'package:mobile_store_driver/constants.dart';
 import 'package:mobile_store_driver/model/cart_model.dart';
 import 'package:mobile_store_driver/model/driver/store_item.dart';
 import 'package:mobile_store_driver/model/driver/supplier.dart';
-import 'package:mobile_store_driver/screen/driver-orders/DriverApp_CreateStoreRequest.dart';
 
 class RefillOrder {
   static final List<RefillOrder> driverRefillOrders = [];
   static RefillOrder todayStoreOrder;
 
-  static createTodayStoreOrder(List<CartItem> cartItems, int totalItems) {
+  static createTodayStoreOrder(List<CartItemModel> cartItems, int totalItems) {
     todayStoreOrder = RefillOrder(
       orderId: Random().nextInt(100),
       status: Random().nextBool()
@@ -21,9 +20,9 @@ class RefillOrder {
     );
     cartItems.forEach((cartItem) {
       StoreItem storeItem = StoreItem(
-          itemName: cartItem.name,
+          itemName: cartItem.product.name,
           storeQuantity: cartItem.quantity,
-          image: cartItem.image);
+          image: AssetImage(cartItem.product.image));
       todayStoreOrder.storeItems.add(storeItem);
     });
     todayStoreOrder.itemsTotal = totalItems;
