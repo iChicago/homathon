@@ -30,9 +30,6 @@ class _RefillDriverScreenState extends State<RefillPage> {
               DataSample.refilItems[i].quantity);
       totalItems = totalItems + DataSample.refilItems[i].quantity;
     }
-
-    DataSample.refilItems.forEach((item) =>
-        totalValue = totalValue + (item.product.price * item.quantity));
   }
 
   List<Widget> getCartItems() {

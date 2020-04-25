@@ -68,10 +68,11 @@ class _MyCartState extends State<MyCart> {
 
   Widget getTotalWidget() {
     return Card(
-        color: Colors.amber[100],
+        elevation: 1.0,
+        color: Colors.white,
         margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(8.0),
         ),
         child: Padding(
           padding: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 2.0),
@@ -81,6 +82,7 @@ class _MyCartState extends State<MyCart> {
               Text(
                 'Total',
                 style: TextStyle(
+                  color: Color(0xfff8615a),
                   fontWeight: FontWeight.bold,
                   fontSize: 25,
                 ),
@@ -92,10 +94,7 @@ class _MyCartState extends State<MyCart> {
                     flex: 7,
                     child: Text(
                       'Refrigerator Items',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.grey),
+                      style: TextStyle(fontSize: 20, color: Colors.grey),
                     ),
                   ),
                   Expanded(
@@ -103,9 +102,8 @@ class _MyCartState extends State<MyCart> {
                     child: Text(
                       '5',
                       style: TextStyle(
-                          fontSize: 20,
-//                          color: Colors.blue[700],
-                          fontWeight: FontWeight.bold),
+                        fontSize: 20,
+                      ),
                     ),
                   )
                 ],
@@ -119,10 +117,7 @@ class _MyCartState extends State<MyCart> {
                     flex: 7,
                     child: Text(
                       'Freezer Items',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.grey),
+                      style: TextStyle(fontSize: 20, color: Colors.grey),
                     ),
                   ),
                   Expanded(
@@ -130,9 +125,8 @@ class _MyCartState extends State<MyCart> {
                     child: Text(
                       '6',
                       style: TextStyle(
-                          fontSize: 20,
-//                          color: Colors.blue[700],
-                          fontWeight: FontWeight.bold),
+                        fontSize: 20,
+                      ),
                     ),
                   )
                 ],
@@ -146,10 +140,7 @@ class _MyCartState extends State<MyCart> {
                     flex: 7,
                     child: Text(
                       'Room Temperature Items',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.grey),
+                      style: TextStyle(fontSize: 20, color: Colors.grey),
                     ),
                   ),
                   Expanded(
@@ -157,9 +148,8 @@ class _MyCartState extends State<MyCart> {
                     child: Text(
                       '30',
                       style: TextStyle(
-                          fontSize: 20,
-//                          color: Colors.blue[700],
-                          fontWeight: FontWeight.bold),
+                        fontSize: 20,
+                      ),
                     ),
                   )
                 ],
@@ -176,7 +166,7 @@ class _MyCartState extends State<MyCart> {
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.grey),
+                          color: Color(0xffb80d57)),
                     ),
                   ),
                   Expanded(
@@ -185,7 +175,7 @@ class _MyCartState extends State<MyCart> {
                       totalItems.toString(),
                       style: TextStyle(
                           fontSize: 20,
-                          color: Colors.blue[700],
+                          color: Color(0xffb80d57),
                           fontWeight: FontWeight.bold),
                     ),
                   )
@@ -205,7 +195,7 @@ class _MyCartState extends State<MyCart> {
                             MaterialPageRoute(
                                 builder: (context) => DriverOrdersPage()));
                       },
-                      color: Colors.green[500],
+                      color: Color(0xfff8615a),
                       icon: Icon(
                         Icons.cloud_upload,
                         color: Colors.white,
@@ -228,11 +218,8 @@ class _MyCartState extends State<MyCart> {
 
   Widget getHeaderWidget() {
     return Card(
-        color: Colors.red[700],
+        color: Color(0xffb80d57),
         margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
-//        shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(15.0),
-//        ),
         child: Padding(
           padding: EdgeInsets.fromLTRB(50.0, 8.0, 0.0, 0.0),
           child: Column(
@@ -291,83 +278,52 @@ class _MyCartState extends State<MyCart> {
 
   Widget getItemCard({CartItem cartItem}) {
     return Card(
-      color: Colors.green[50],
+      elevation: 1.0,
+      color: Colors.white,
       margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
+        borderRadius: BorderRadius.circular(4.0),
       ),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            flex: 0,
-            child: CircleAvatar(
-              backgroundImage: cartItem.image,
-              radius: 20,
-            ),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          Expanded(
-            flex: 10,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  cartItem.name,
-                  style: TextStyle(
-                    color: Colors.grey[700],
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-//                    fontFamily: 'Lobster',
-                  ),
-                ),
-//                  Text(
-//                    'SR ${cartItem.price}',
-//                    style: TextStyle(
-//                        fontWeight: FontWeight.bold,
-//                        color: Colors.red[800],
-//                        fontSize: 15,
-//                        letterSpacing: 2,
-//                        backgroundColor: Colors.grey[300],
-//                        fontStyle: FontStyle.italic),
-//                  )
-              ],
-            ),
-          ), //
-          Expanded(
-            flex: 2,
-            child: Text(
-              cartItem.quantity.toString(),
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Lobster',
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              flex: 0,
+              child: CircleAvatar(
+                backgroundImage: cartItem.image,
+                radius: 20,
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget getRemoveButton({CartItem cartItem}) {
-    return Expanded(
-      flex: 4,
-      child: MaterialButton(
-        minWidth: 60,
-        onPressed: () {
-          setState(() {
-            cartItem.quantity > 1
-                ? removeFromCart(cartItem: cartItem)
-                : deleteCartItem(cartItem);
-          });
-        },
-        color: Colors.grey[200],
-//                  textColor: Colors.white,
-        child: Icon(cartItem.quantity > 1 ? Icons.remove : Icons.delete,
-            size: 25,
-            color: cartItem.quantity > 1 ? Colors.grey : Colors.red[300]),
-        shape: CircleBorder(),
+            SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              flex: 10,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    cartItem.name,
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
+            ), //
+            Expanded(
+              flex: 2,
+              child: Text(
+                cartItem.quantity.toString(),
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -378,11 +334,9 @@ class _MyCartState extends State<MyCart> {
         appBar: AppBar(
           title: Text(
             'Request To Store Items',
-            style: TextStyle(
-//                fontFamily: 'Lobster', fontSize: 30
-                fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          backgroundColor: Colors.red[900],
+          backgroundColor: Color(0xffffd868),
           centerTitle: true,
           automaticallyImplyLeading: false,
         ),

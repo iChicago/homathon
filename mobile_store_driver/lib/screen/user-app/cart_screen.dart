@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:mobile_store_driver/Model/model_index.dart';
 import 'package:mobile_store_driver/core/index.dart';
 import 'package:mobile_store_driver/model/customer/order.dart';
@@ -12,6 +13,7 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   double cartTotal = 0;
   double deliveryFees = 10;
+  double vatPresent = 0.05;
   double vat = 0;
   double orderTotal = 0;
 
@@ -21,11 +23,8 @@ class _CartScreenState extends State<CartScreen> {
     // Cart Total
     DataSample.cartItems.forEach(
         (item) => cartTotal = cartTotal + (item.product.price * item.quantity));
-    orderTotal = cartTotal + vat + deliveryFees;
-  }
-
-  calculateOrderTotal() {
-    return cartTotal + (cartTotal * Order.VAT) + deliveryFees;
+    vat = (cartTotal + deliveryFees) * vatPresent;
+    orderTotal = cartTotal + deliveryFees + vat;
   }
 
   List<Widget> getCartItems() {
@@ -111,7 +110,7 @@ class _CartScreenState extends State<CartScreen> {
                   Expanded(
                     flex: 3,
                     child: Text(
-                      'SR ${(cartTotal * Order.VAT).toStringAsFixed(2)}',
+                      'SR $vat',
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.grey,
@@ -136,7 +135,7 @@ class _CartScreenState extends State<CartScreen> {
                   Expanded(
                     flex: 3,
                     child: Text(
-                      'SR ${calculateOrderTotal().toStringAsFixed(2)}',
+                      'SR $orderTotal',
                       style: TextStyle(
                           fontSize: 20,
                           color: Color(0xffb80d57),
@@ -181,109 +180,131 @@ class _CartScreenState extends State<CartScreen> {
   addToCart(int itemPrice) {
     cartTotal = (cartTotal + itemPrice);
     orderTotal = orderTotal + itemPrice;
+    vat = vat + (itemPrice * vatPresent);
   }
 
   removeFromCart(int itemPrice) {
     cartTotal = cartTotal - itemPrice;
     orderTotal = orderTotal - itemPrice;
+    vat = vat - (itemPrice * vatPresent);
   }
 
   void removeCartItem(CartItemModel cartItem) {
+    cartTotal = cartTotal - (cartItem.product.price * cartItem.quantity);
+    orderTotal = orderTotal -
+        ((cartItem.product.price * cartItem.quantity) +
+            ((cartItem.product.price * cartItem.quantity) * vatPresent));
+    vat = vat - ((cartItem.product.price * cartItem.quantity) * vatPresent);
     DataSample.cartItems.remove(cartItem);
   }
 
   Widget getItemCard({CartItemModel cartItem}) {
-    return Card(
-      elevation: 1.0,
-      color: Colors.white,
-      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              flex: 0,
-              child: CircleAvatar(
-                backgroundImage: AssetImage(cartItem.product.image),
-                radius: 20,
+    return Dismissible(
+      key: GlobalKey<FormBuilderState>(),
+      background: Container(
+        alignment: Alignment.centerLeft,
+        color: Color(0xffb80d57),
+        child: Icon(Icons.delete, color: Colors.white),
+      ),
+      onDismissed: (direction) {
+        removeCartItem(cartItem);
+        setState(() {});
+      },
+      child: Card(
+        elevation: 1.0,
+        color: Colors.white,
+        margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                flex: 0,
+                child: CircleAvatar(
+                  backgroundImage: AssetImage(cartItem.product.image),
+                  radius: 20,
+                ),
               ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              flex: 10,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    cartItem.product.name,
-                    style: TextStyle(
-                      color: Colors.grey[700],
-                      fontSize: 20,
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                flex: 10,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      cartItem.product.name,
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 20,
+                      ),
                     ),
+                    Text(
+                      'SR ${cartItem.product.price}',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xfff8615a),
+                          fontSize: 15,
+                          letterSpacing: 2,
+                          fontStyle: FontStyle.italic),
+                    )
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 3,
+                child: MaterialButton(
+                  minWidth: 60,
+                  onPressed: () {
+                    setState(() {
+                      cartItem.quantity--;
+                      if (cartItem.quantity == 0) {
+                        removeCartItem(cartItem);
+                      }
+                      removeFromCart(cartItem.product.price);
+                    });
+                  },
+                  color: Colors.grey[200],
+                  child: Icon(
+                      cartItem.quantity > 1 ? Icons.remove : Icons.delete,
+                      size: 25,
+                      color: Colors.grey),
+                  shape: CircleBorder(),
+                ),
+              ),
+              Expanded(
+                flex: 0,
+                child: Text(
+                  cartItem.quantity.toString(),
+                  style: TextStyle(
+                    fontSize: 20,
                   ),
-                  Text(
-                    'SR ${cartItem.product.price}',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xfff8615a),
-                        fontSize: 15,
-                        letterSpacing: 2,
-                        fontStyle: FontStyle.italic),
-                  )
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: MaterialButton(
-                minWidth: 60,
-                onPressed: () {
-                  setState(() {
-                    cartItem.quantity--;
-                    if (cartItem.quantity == 0) {
-                      removeCartItem(cartItem);
-                    }
-                    removeFromCart(cartItem.product.price);
-                  });
-                },
-                color: Colors.grey[200],
-                child: Icon(cartItem.quantity > 1 ? Icons.remove : Icons.delete,
-                    size: 25, color: Colors.grey),
-                shape: CircleBorder(),
-              ),
-            ),
-            Expanded(
-              flex: 0,
-              child: Text(
-                cartItem.quantity.toString(),
-                style: TextStyle(
-                  fontSize: 20,
                 ),
               ),
-            ),
-            Expanded(
-              flex: 3,
-              child: MaterialButton(
-                minWidth: 60,
-                onPressed: () {
-                  setState(() {
-                    cartItem.quantity++;
-                    addToCart(cartItem.product.price);
-                  });
-                },
-                color: Color(0xffb80d57),
-                child: Icon(
-                  Icons.add,
-                  size: 20,
-                  color: Colors.white,
+              Expanded(
+                flex: 3,
+                child: MaterialButton(
+                  minWidth: 60,
+                  onPressed: () {
+                    setState(() {
+                      cartItem.quantity++;
+                      addToCart(cartItem.product.price);
+                    });
+                  },
+                  color: Color(0xffb80d57),
+                  child: Icon(
+                    Icons.add,
+                    size: 20,
+                    color: Colors.white,
+                  ),
+                  shape: CircleBorder(),
                 ),
-                shape: CircleBorder(),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

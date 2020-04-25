@@ -53,11 +53,11 @@ class DriverOrderDetailsPage extends StatelessWidget {
               SizedBox(
                 height: 8,
               ),
-              Text(
-                'Items',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
+              Padding(
+                padding: EdgeInsets.all(15),
+                child: Text(
+                  'Items',
+                  style: TextStyle(fontSize: 20, color: Color(0xffb80d57)),
                 ),
               ),
               buildItemsCards(),
@@ -76,30 +76,32 @@ class DriverOrderDetailsPage extends StatelessWidget {
   Column buildItemsCards() {
     List<Card> itemsCards = refillOrder.storeItems
         .map((item) => new Card(
-      elevation: 1.0,
-      margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
-      color: Colors.white,
-      child: Row(children: [
-        Expanded(
-          flex: 8,
-          child: Text(item.itemName,
-              textAlign: TextAlign.left,
-              style:
-              TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-        ),
-        Expanded(
-          flex: 2,
-          child: CircleAvatar(
-            radius: 15,
-            child: Text(item.storeQuantity.toString(),
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                )),
-            backgroundColor: Colors.white,
-          ),
-        ),
-      ]),
+              elevation: 1.0,
+              margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(children: [
+                  Expanded(
+                    flex: 8,
+                    child: Text(item.itemName,
+                        textAlign: TextAlign.left,
+                        style: TextStyle(fontSize: 20, color: Colors.grey)),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: CircleAvatar(
+                      radius: 15,
+                      child: Text(item.storeQuantity.toString(),
+                          style: TextStyle(
+                            color: Color(0xff721b65),
+                            fontSize: 20,
+                          )),
+                      backgroundColor: Colors.white,
+                    ),
+                  ),
+                ]),
+              ),
             ))
         .toList();
     return Column(children: itemsCards);

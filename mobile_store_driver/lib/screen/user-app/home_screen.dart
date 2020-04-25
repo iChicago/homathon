@@ -95,6 +95,7 @@ class _MyHomePageState extends State<HomeScreen> {
           ),
         ],
       ),
+      drawer: Drawer(),
       body: ListView(
         children: <Widget>[
           Container(
