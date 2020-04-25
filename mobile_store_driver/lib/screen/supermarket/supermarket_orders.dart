@@ -91,7 +91,8 @@ class SuperMarketOrdersPage extends StatelessWidget {
                         flex: 5,
                         child: Text('Order# ${order.orderId}',
                             textAlign: TextAlign.left,
-                            style: TextStyle(fontSize: 20, color: Colors.grey)),
+                            style: TextStyle(
+                                fontSize: 20, color: Color(0xff721b65))),
                       ),
                       Expanded(
                         flex: 3,

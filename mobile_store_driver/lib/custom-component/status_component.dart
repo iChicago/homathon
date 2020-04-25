@@ -29,9 +29,9 @@ class StatusWidget extends StatelessWidget {
                   child: Text(
                     'Order Status',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Color(0xff721b65)),
                   ),
                 ),
                 Expanded(
