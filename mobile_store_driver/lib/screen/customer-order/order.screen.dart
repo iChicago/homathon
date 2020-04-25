@@ -105,6 +105,8 @@ class _OrdersPageState extends State<OrdersPage> {
 
   Widget getItemListTile(index) {
     if (orders.isNotEmpty) {
+      final order = orders[index];
+      bool isStatusInProgress = order.status == Constants.STATUS_IN_PROGRESS;
       return Column(
         children: <Widget>[
           new ListTile(
@@ -114,29 +116,47 @@ class _OrdersPageState extends State<OrdersPage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => OrderDetailsPage(),
-                  settings: RouteSettings(arguments: orders[index]),
+                  settings: RouteSettings(arguments: order),
                 ),
               );
             },
-            title: new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                new Text(
-                  'Order# ${orders[index].orderId}',
-                  style:
-                      new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                new Text(
-                  '${orders[index].distance} km',
-                  style: new TextStyle(color: Colors.black, fontSize: 14.0),
-                ),
-              ],
-            ),
-            subtitle: new Container(
-              padding: const EdgeInsets.only(top: 5.0),
-              child: new Text(
-                orders[index].status,
-                style: new TextStyle(color: Colors.green, fontSize: 15.0),
+            title: new Card(
+              elevation: 1.5,
+              margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Row(children: [
+                  Expanded(
+                    flex: 5,
+                    child: Text('Order# ${order.orderId}',
+                        textAlign: TextAlign.left,
+                        style:
+                            TextStyle(fontSize: 20, color: Color(0xff721b65))),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: CircleAvatar(
+                      radius: 15,
+                      child: new Text(
+                        order.status,
+                        style: new TextStyle(
+                            color: isStatusInProgress
+                                ? Colors.yellow[800]
+                                : Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15.0),
+                      ),
+                      backgroundColor: Colors.white,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Text('${order.distance} km',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(fontSize: 15, color: Colors.grey)),
+                  ),
+                ]),
               ),
             ),
           ),

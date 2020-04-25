@@ -65,8 +65,9 @@ class SuperMarketOrdersPage extends StatelessWidget {
       itemCount: orders.length,
       itemBuilder: (BuildContext context, int index) {
         final RefillOrder order = orders[index];
-        bool isStatusInProgress = order.status == Constants.STATUS_IN_PROGRESS;
         if (order != null) {
+          bool isStatusInProgress =
+              order.status == Constants.STATUS_IN_PROGRESS;
           return Column(
             children: <Widget>[
               new ListTile(
