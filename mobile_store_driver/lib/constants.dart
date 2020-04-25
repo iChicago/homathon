@@ -20,9 +20,9 @@ class Constants {
 
   static const List<String> orderDetailsChoices = <String>[STATUS_CANCELLED];
 
-  static const String urgentRefill = 'High';
-  static const String canWaitRefill = 'Medium';
-  static const String noNeedRefill = 'Low';
+  static const String urgentRefill = 'Low Stock';
+  static const String canWaitRefill = 'Medium Stock';
+  static const String noNeedRefill = 'High Stock';
   static const String allRefill = 'All';
 
   static const List<String> refillSortChoices = <String>[

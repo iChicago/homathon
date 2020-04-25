@@ -58,6 +58,7 @@ class Order {
           pricePerUnit: cartItem.product.price.toDouble(),
           image: AssetImage(cartItem.product.image));
       itemTotal += storeItem.pricePerUnit * cartItem.quantity;
+      cartItem.product.remaining -= cartItem.quantity;
       customerOrder.items.add(storeItem);
     });
     customerOrder.itemsTotal = itemTotal;

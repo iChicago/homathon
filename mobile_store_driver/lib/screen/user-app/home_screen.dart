@@ -26,7 +26,7 @@ class _MyHomePageState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    products = prodectsIs(code: 0);
+    products = getCategoryProducts(category: 0);
   }
 
   @override
@@ -122,7 +122,7 @@ class _MyHomePageState extends State<HomeScreen> {
                       return GestureDetector(
                         onTap: () {
                           setState(() {
-                            products = prodectsIs(code: index);
+                            products = getCategoryProducts(category: index);
                           });
                         },
                         child: Padding(
@@ -147,13 +147,15 @@ class _MyHomePageState extends State<HomeScreen> {
     );
   }
 
-  List<Product> prodectsIs({int code}) {
+  List<Product> getCategoryProducts({int category}) {
+    var availableProducts =
+        DataSample.products.where((product) => product.remaining > 0).toList();
     List<Product> products = [];
-    if (code == 0) {
-      return DataSample.product;
+    if (category == 0) {
+      return availableProducts;
     } else {
-      for (var i in DataSample.product) {
-        if (i.categoryc == code) {
+      for (var i in availableProducts) {
+        if (i.category == category) {
           products.add(i);
         }
       }
