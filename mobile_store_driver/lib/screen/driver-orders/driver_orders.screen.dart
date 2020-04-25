@@ -38,7 +38,7 @@ class DriverOrdersPage extends StatelessWidget {
                   icon: Icon(Icons.add_box),
                   text: 'Refill Orders',
                 ),
-                Tab(icon: FaIcon(FontAwesomeIcons.store), text: 'Store Orders'),
+                Tab(icon: FaIcon(FontAwesomeIcons.store), text: 'Store Order'),
               ],
               indicatorColor: Color(0xffb80d57),
               indicatorWeight: 4.0,
@@ -100,29 +100,42 @@ class DriverOrdersPage extends StatelessWidget {
                   ),
                 );
               },
-              title: new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  new Text(
-                    'Order# ${order.orderId}',
-                    style: new TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
-                  new Text(
-                    order.status,
-                    style: new TextStyle(
-                        color: isStatusInProgress
-                            ? Colors.yellow[800]
-                            : Colors.green,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15.0),
-                  ),
-                ],
+              title: new Card(
+                elevation: 1.5,
+                margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Row(children: [
+                    Expanded(
+                      flex: 5,
+                      child: Text('Order# ${order.orderId}',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(fontSize: 20, color: Colors.grey)),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: CircleAvatar(
+                        radius: 15,
+                        child: new Text(
+                          order.status,
+                          style: new TextStyle(
+                              color: isStatusInProgress
+                                  ? Colors.yellow[800]
+                                  : Colors.green,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15.0),
+                        ),
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                  ]),
+                ),
               ),
             ),
-            Divider(
-              height: 10.0,
-            ),
+//            Divider(
+//              height: 10.0,
+//            ),
           ],
         );
       },
