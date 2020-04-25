@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mobile_store_driver/custom-component/no-data-found.dart';
 import 'package:mobile_store_driver/model/driver/refill_order.dart';
 import 'package:mobile_store_driver/screen/customer-order/order.screen.dart';
 import 'package:mobile_store_driver/screen/driver-orders/DriverApp_CreateStoreRequest.dart';
@@ -83,31 +84,9 @@ class DriverOrdersPage extends StatelessWidget {
   static Widget buildRefillOrdersListView(isStore) {
     List<RefillOrder> orders = RefillOrder.driverRefillOrders;
     if (orders.length == 0) {
-      return Container(
-        height: 200,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Card(
-            color: Colors.white,
-            elevation: 1.0,
-            child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(Icons.assistant, color: Color(0xfff8615a)),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      "No refill order ",
-                      style: TextStyle(color: Colors.grey),
-                    )
-                  ],
-                )),
-          ),
-        ),
+      return NoDataFound(
+        emptyTex: 'No refill orders',
+        iconColor: Constants.DRIVER_APP_COLOR,
       );
     } else {
       return ListView.builder(

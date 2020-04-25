@@ -5,7 +5,6 @@ class Item {
       {this.itemName,
       this.quantity,
       this.pricePerUnit,
-      this.remaining,
       this.image}) {
     this.totalPrice = this.pricePerUnit * this.quantity;
   }
@@ -15,5 +14,4 @@ class Item {
   double pricePerUnit;
   double totalPrice;
   AssetImage image;
-  int remaining;
 }

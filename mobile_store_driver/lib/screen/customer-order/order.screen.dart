@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile_store_driver/constants.dart';
+import 'package:mobile_store_driver/custom-component/no-data-found.dart';
 import 'package:mobile_store_driver/model/customer/order.dart';
 import 'package:mobile_store_driver/screen/customer-order/order-details.screen.dart';
 import 'package:mobile_store_driver/screen/driver-orders/driver_orders.screen.dart';
@@ -94,13 +95,28 @@ class _OrdersPageState extends State<OrdersPage> {
           )
         ],
       ),
-      body: ListView.builder(
+      body: buildOrderListItems(),
+    );
+  }
+
+  Widget buildOrderListItems() {
+    if (orders.isNotEmpty) {
+      return ListView.builder(
         itemCount: orders.length,
         itemBuilder: (BuildContext context, int index) {
           return getItemListTile(index);
         },
-      ),
-    );
+      );
+    } else {
+      return Row(children: <Widget>[
+        Expanded(
+          child: NoDataFound(
+            emptyTex: 'No Customers Orders',
+            iconColor: Constants.DRIVER_APP_COLOR,
+          ),
+        ),
+      ]);
+    }
   }
 
   Widget getItemListTile(index) {

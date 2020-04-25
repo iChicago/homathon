@@ -40,6 +40,19 @@ class Order {
     }
   }
 
+  cancelOrder(cancellationReason) {
+    this.status = Constants.STATUS_CANCELLED;
+    this.cancellationReason = cancellationReason;
+    items.forEach((item) {
+      var product = DataSample.products
+          .where((product) => product.name == item.itemName)
+          .first;
+      if (product != null) {
+        product.remaining += item.quantity;
+      }
+    });
+  }
+
   static List<Order> get list => _list;
 
   static Order createOrder() {

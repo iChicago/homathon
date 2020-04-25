@@ -33,8 +33,7 @@ class CancleOrderPage extends StatelessWidget {
                     child: ListTile(
                       title: Text(item),
                       onTap: () {
-                        this.order.status = Constants.STATUS_CANCELLED;
-                        this.order.cancellationReason = item;
+                        this.order.cancelOrder(item);
                         Navigator.push(
                             context,
                             MaterialPageRoute(

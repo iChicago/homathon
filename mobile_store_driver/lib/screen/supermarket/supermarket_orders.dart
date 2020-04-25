@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mobile_store_driver/custom-component/no-data-found.dart';
 import 'package:mobile_store_driver/model/driver/refill_order.dart';
 import 'package:mobile_store_driver/screen/login_page.dart';
 import 'package:mobile_store_driver/screen/supermarket/supermarket_order_items_details.dart';
@@ -54,76 +55,85 @@ class SuperMarketOrdersPage extends StatelessWidget {
     );
   }
 
-  ListView buildRefillOrdersListView(isStore) {
-    List<RefillOrder> orders;
+  Widget buildRefillOrdersListView(isStore) {
+    List<RefillOrder> orders = [];
     if (isStore) {
-      orders = [RefillOrder.todayStoreOrder];
+      if (RefillOrder.todayStoreOrder != null) {
+        orders = [RefillOrder.todayStoreOrder];
+      }
     } else {
       orders = RefillOrder.driverRefillOrders;
     }
-    return ListView.builder(
-      itemCount: orders.length,
-      itemBuilder: (BuildContext context, int index) {
-        final RefillOrder order = orders[index];
-        if (order != null) {
-          bool isStatusInProgress =
-              order.status == Constants.STATUS_IN_PROGRESS;
-          return Column(
-            children: <Widget>[
-              new ListTile(
-                dense: true,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => StoreKeeper(),
-                      settings: RouteSettings(arguments: order),
-                    ),
-                  );
-                },
-                title: new Card(
-                  elevation: 1.5,
-                  margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Row(children: [
-                      Expanded(
-                        flex: 5,
-                        child: Text('Order# ${order.orderId}',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontSize: 20, color: Color(0xff721b65))),
+    if (orders.isEmpty) {
+      return NoDataFound(
+        emptyTex: isStore ? 'No Store Orders' : 'No Refill Orders',
+        iconColor: Constants.SUPERMARKET_APP_COLOR,
+      );
+    } else {
+      return ListView.builder(
+        itemCount: orders.length,
+        itemBuilder: (BuildContext context, int index) {
+          final RefillOrder order = orders[index];
+          if (order != null) {
+            bool isStatusInProgress =
+                order.status == Constants.STATUS_IN_PROGRESS;
+            return Column(
+              children: <Widget>[
+                new ListTile(
+                  dense: true,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StoreKeeper(),
+                        settings: RouteSettings(arguments: order),
                       ),
-                      Expanded(
-                        flex: 3,
-                        child: CircleAvatar(
-                          radius: 15,
-                          child: new Text(
-                            order.status,
-                            style: new TextStyle(
-                                color: isStatusInProgress
-                                    ? Colors.yellow[800]
-                                    : Colors.green,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15.0),
-                          ),
-                          backgroundColor: Colors.white,
+                    );
+                  },
+                  title: new Card(
+                    elevation: 1.5,
+                    margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Row(children: [
+                        Expanded(
+                          flex: 5,
+                          child: Text('Order# ${order.orderId}',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  fontSize: 20, color: Color(0xff721b65))),
                         ),
-                      ),
-                    ]),
+                        Expanded(
+                          flex: 3,
+                          child: CircleAvatar(
+                            radius: 15,
+                            child: new Text(
+                              order.status,
+                              style: new TextStyle(
+                                  color: isStatusInProgress
+                                      ? Colors.yellow[800]
+                                      : Colors.green,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15.0),
+                            ),
+                            backgroundColor: Colors.white,
+                          ),
+                        ),
+                      ]),
+                    ),
                   ),
                 ),
-              ),
 //              Divider(
 //                height: 10.0,
 //              ),
-            ],
-          );
-        } else {
-          return Container();
-        }
-      },
-    );
+              ],
+            );
+          } else {
+            return Container();
+          }
+        },
+      );
+    }
   }
 }
