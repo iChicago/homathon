@@ -2,8 +2,9 @@ class Product {
   //int index;
   int code;
   int price;
-  int categoryc;
+  int category;
   int stock;
+  int remaining;
   String name;
   String moreInfo;
   String image;
@@ -11,9 +12,10 @@ class Product {
   Product(
       {this.code,
       this.name,
-      this.categoryc,
+      this.category,
       this.price,
       this.stock,
+      this.remaining,
       this.moreInfo,
       this.image});
 }
