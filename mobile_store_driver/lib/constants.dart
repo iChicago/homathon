@@ -18,7 +18,8 @@ class Constants {
     ALL_ORDERS
   ];
 
-  static const List<String> orderDetailsChoices = <String>[STATUS_CANCELLED];
+  static const String CANCEL_ORDER = 'Cancle';
+  static const List<String> orderDetailsChoices = <String>[CANCEL_ORDER];
 
   static const String urgentRefill = 'Low Stock';
   static const String canWaitRefill = 'Medium Stock';
