@@ -31,7 +31,7 @@ class DriverOrdersPage extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => OrdersPage()));
               },
               child: Icon(
-                Icons.reorder, // add custom icons also
+                Icons.arrow_back, // add custom icons also
               ),
             ),
             bottom: TabBar(
