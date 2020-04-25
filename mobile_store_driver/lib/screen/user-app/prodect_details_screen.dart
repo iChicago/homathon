@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_store_driver/Model/model_index.dart';
-import 'package:mobile_store_driver/core/index.dart';
+import 'package:mobile_store_driver/model/cart_model.dart';
+import 'package:mobile_store_driver/model/data_sample.dart';
+import 'package:mobile_store_driver/model/product.dart';
 import 'package:mobile_store_driver/screen/user-app/index.dart';
 
 class ProductDetailsScreen extends StatefulWidget {

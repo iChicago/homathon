@@ -1,19 +1,18 @@
-//import 'package:mobile_store_driver/Model/model_index.dart';
-
-import 'package:mobile_store_driver/model/cart_item.dart';
+import 'package:mobile_store_driver/model/cart_model.dart';
+import 'package:mobile_store_driver/model/category_model.dart';
 import 'package:mobile_store_driver/model/product.dart';
 
 class DataSample {
-//  static final List<Category> category = [
-//    Category(index: 0, name: "All"),
-//    Category(index: 1, name: "Bread"),
-//    Category(index: 2, name: "Egg"),
-//    Category(index: 3, name: "Dairy"),
-//    Category(index: 4, name: "Fruits"),
-//    Category(index: 5, name: "Vegetables"),
-//    Category(index: 6, name: "Chocolates"),
-//    Category(index: 7, name: "Snacks"),
-//  ];
+  static final List<Category> category = [
+    Category(index: 0, name: "All"),
+    Category(index: 1, name: "Bread"),
+    Category(index: 2, name: "Egg"),
+    Category(index: 3, name: "Dairy"),
+    Category(index: 4, name: "Fruits"),
+    Category(index: 5, name: "Vegetables"),
+    Category(index: 6, name: "Chocolates"),
+    Category(index: 7, name: "Snacks"),
+  ];
 
   static final List<Product> cart = [];
   static final List<CartItemModel> cartItems = [];
@@ -43,8 +42,7 @@ class DataSample {
         categoryc: 2,
         price: 20,
         stock: 50,
-        moreInfo:
-            "Box Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        moreInfo: "Sample infor about our product.",
         image: 'assets/images/egg.jpg'),
     Product(
         code: 2,
@@ -53,7 +51,7 @@ class DataSample {
         price: 5,
         stock: 50,
         moreInfo:
-        "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "Sample infor about our product.",
         image: 'assets/images/bread.png'),
     Product(
         code: 3,
@@ -62,7 +60,7 @@ class DataSample {
         price: 8,
         stock: 40,
         moreInfo:
-        "Kg Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "Sample infor about our product.",
         image: 'assets/images/cucumber.jpg'),
     Product(
         code: 4,
@@ -71,7 +69,7 @@ class DataSample {
         price: 10,
         stock: 80,
         moreInfo:
-        "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "Sample infor about our product.",
         image: 'assets/images/milk.jpg'),
     Product(
         code: 5,
@@ -80,7 +78,7 @@ class DataSample {
         price: 10,
         stock: 80,
         moreInfo:
-        "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "Sample infor about our product.",
         image: 'assets/images/milk1.png'),
     Product(
         code: 6,
@@ -89,7 +87,7 @@ class DataSample {
         price: 10,
         stock: 80,
         moreInfo:
-        "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "Sample infor about our product.",
         image: 'assets/images/milk2.jpg'),
     Product(
         code: 7,
@@ -98,7 +96,7 @@ class DataSample {
         price: 25,
         stock: 40,
         moreInfo:
-        "Kg Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "Sample infor about our product.",
         image: 'assets/images/tomatoes.jpg'),
     Product(
         code: 8,
@@ -107,7 +105,7 @@ class DataSample {
         price: 10,
         stock: 80,
         moreInfo:
-        "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "Sample infor about our product.",
         image: 'assets/images/cheese1.jpg'),
     Product(
         code: 9,
@@ -116,7 +114,7 @@ class DataSample {
         price: 10,
         stock: 80,
         moreInfo:
-        "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "Sample infor about our product.",
         image: 'assets/images/chees.jpg'),
     Product(
         code: 10,
@@ -125,7 +123,7 @@ class DataSample {
         price: 10,
         stock: 80,
         moreInfo:
-        "pice Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "Sample infor about our product.",
         image: 'assets/images/cheese1.jpg'),
     Product(
         code: 11,
@@ -134,7 +132,7 @@ class DataSample {
         price: 12,
         stock: 4,
         moreInfo:
-        "Kg Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "Sample infor about our product.",
         image: 'assets/images/potatos.jpg'),
   ];
 }

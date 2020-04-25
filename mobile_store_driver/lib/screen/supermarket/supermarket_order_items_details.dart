@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:mobile_store_driver/model/cart_item.dart';
+import 'package:mobile_store_driver/model/cart_model.dart';
 import 'package:mobile_store_driver/model/data_sample.dart';
 import 'package:mobile_store_driver/screen/supermarket/submit_supermarket_order.dart';
 

@@ -84,6 +84,7 @@ class DriverOrdersPage extends StatelessWidget {
       itemCount: orders.length,
       itemBuilder: (BuildContext context, int index) {
         final RefillOrder order = orders[index];
+        bool isStatusInProgress = order.status == Constants.STATUS_IN_PROGRESS;
         return Column(
           children: <Widget>[
             new ListTile(
@@ -108,7 +109,9 @@ class DriverOrdersPage extends StatelessWidget {
                   new Text(
                     order.status,
                     style: new TextStyle(
-                        color: Colors.green,
+                        color: isStatusInProgress
+                            ? Colors.yellow[800]
+                            : Colors.green,
                         fontWeight: FontWeight.bold,
                         fontSize: 15.0),
                   ),

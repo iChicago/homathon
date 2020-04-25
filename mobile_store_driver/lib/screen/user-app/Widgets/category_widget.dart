@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_store_driver/Model/model_index.dart';
+import 'package:mobile_store_driver/model/category_model.dart';
 
 class CategoryWidget extends StatelessWidget {
   final Category category;

@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobile_store_driver/constants.dart';
-import 'package:mobile_store_driver/core/constent.dart';
 import 'package:mobile_store_driver/model/customer/item.dart';
+import 'package:mobile_store_driver/model/data_sample.dart';
 
 class Order {
   static final double VAT = 0.05;
@@ -45,7 +45,7 @@ class Order {
   static Order createOrder() {
     Order customerOrder = Order(
         orderId: new Random().nextInt(100),
-        status: Constants.STATUS_IN_PROGRESS,
+        status: Constants.STATUS_NEW,
         distance: 2.5,
         deliveryFees: 10,
         address: ' 1234, King Fahd rd, Olaya ');
@@ -64,9 +64,6 @@ class Order {
     customerOrder.vatTotal = customerOrder.itemsTotal * VAT;
     customerOrder.orderTotal =
         itemTotal + customerOrder.vatTotal + customerOrder.deliveryFees;
-    print(itemTotal);
-    print(customerOrder.deliveryFees);
-    print(customerOrder.orderTotal);
     _list.add(customerOrder);
     return customerOrder;
   }

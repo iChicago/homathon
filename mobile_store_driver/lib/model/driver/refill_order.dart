@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:mobile_store_driver/constants.dart';
-import 'package:mobile_store_driver/model/cart_item.dart';
+import 'package:mobile_store_driver/model/cart_model.dart';
 import 'package:mobile_store_driver/model/driver/store_item.dart';
 import 'package:mobile_store_driver/model/driver/supplier.dart';
 import 'package:mobile_store_driver/screen/driver-orders/DriverApp_CreateStoreRequest.dart';

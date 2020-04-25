@@ -28,13 +28,12 @@ class DriverOrderDetailsPage extends StatelessWidget {
 
   AppBar buildAppBar(context) {
     return AppBar(
-      backgroundColor: Constants.DRIVER_APP_COLOR,
-      title: Text(
-        'Order# ' + this.refillOrder.orderId.toString(),
-        style: TextStyle(fontStyle: FontStyle.italic),
-      ),
-      leading: Center(child: BackButton()),
-    );
+        centerTitle: true,
+        backgroundColor: Constants.DRIVER_APP_COLOR,
+        title: Text(
+          'Order# ' + this.refillOrder.orderId.toString(),
+          style: TextStyle(fontStyle: FontStyle.italic),
+        ));
   }
 
   SingleChildScrollView buildBody(context) {

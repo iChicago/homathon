@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:mobile_store_driver/Model/model_index.dart';
-import 'package:mobile_store_driver/core/index.dart';
+import 'package:mobile_store_driver/model/cart_model.dart';
 import 'package:mobile_store_driver/model/customer/order.dart';
+import 'package:mobile_store_driver/model/data_sample.dart';
 import 'package:mobile_store_driver/screen/user-app/index.dart';
 
 class CartScreen extends StatefulWidget {
@@ -13,9 +13,10 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   double cartTotal = 0;
   double deliveryFees = 10;
-  double vatPresent = 0.05;
-  double vat = 0;
-  double orderTotal = 0;
+  double vatPresent = Order.VAT;
+
+//  double vat = 0;
+//  double orderTotal = 0;
 
   @override
   void initState() {
@@ -23,8 +24,12 @@ class _CartScreenState extends State<CartScreen> {
     // Cart Total
     DataSample.cartItems.forEach(
         (item) => cartTotal = cartTotal + (item.product.price * item.quantity));
-    vat = (cartTotal + deliveryFees) * vatPresent;
-    orderTotal = cartTotal + deliveryFees + vat;
+//    vat = cartTotal * vatPresent;
+//    orderTotal = cartTotal + deliveryFees + vat;
+  }
+
+  calculateOrderTotal() {
+    return cartTotal + (cartTotal * vatPresent) + deliveryFees;
   }
 
   List<Widget> getCartItems() {
@@ -82,6 +87,27 @@ class _CartScreenState extends State<CartScreen> {
                   Expanded(
                     flex: 7,
                     child: Text(
+                      'Vat %5',
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Text(
+                      'SR ${(cartTotal * Order.VAT).toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 7,
+                    child: Text(
                       'Delivery Fees',
                       style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
@@ -94,27 +120,6 @@ class _CartScreenState extends State<CartScreen> {
                           fontSize: 18,
                           color: Color(0xfff8615a),
                           fontWeight: FontWeight.bold),
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 7,
-                    child: Text(
-                      'Vat %5',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Text(
-                      'SR $vat',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.grey,
-                      ),
                     ),
                   )
                 ],
@@ -135,7 +140,7 @@ class _CartScreenState extends State<CartScreen> {
                   Expanded(
                     flex: 3,
                     child: Text(
-                      'SR $orderTotal',
+                      'SR ${calculateOrderTotal().toStringAsFixed(2)}',
                       style: TextStyle(
                           fontSize: 20,
                           color: Color(0xffb80d57),
@@ -179,22 +184,22 @@ class _CartScreenState extends State<CartScreen> {
 
   addToCart(int itemPrice) {
     cartTotal = (cartTotal + itemPrice);
-    orderTotal = orderTotal + itemPrice;
-    vat = vat + (itemPrice * vatPresent);
+//    orderTotal = orderTotal + itemPrice;
+//    vat = vat + (itemPrice * vatPresent);
   }
 
   removeFromCart(int itemPrice) {
     cartTotal = cartTotal - itemPrice;
-    orderTotal = orderTotal - itemPrice;
-    vat = vat - (itemPrice * vatPresent);
+//    orderTotal = orderTotal - itemPrice;
+//    vat = vat - (itemPrice * vatPresent);
   }
 
   void removeCartItem(CartItemModel cartItem) {
     cartTotal = cartTotal - (cartItem.product.price * cartItem.quantity);
-    orderTotal = orderTotal -
-        ((cartItem.product.price * cartItem.quantity) +
-            ((cartItem.product.price * cartItem.quantity) * vatPresent));
-    vat = vat - ((cartItem.product.price * cartItem.quantity) * vatPresent);
+//    orderTotal = orderTotal -
+//        ((cartItem.product.price * cartItem.quantity) +
+//            ((cartItem.product.price * cartItem.quantity) * vatPresent));
+//    vat = vat - ((cartItem.product.price * cartItem.quantity) * vatPresent);
     DataSample.cartItems.remove(cartItem);
   }
 

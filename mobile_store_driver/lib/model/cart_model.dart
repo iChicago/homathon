@@ -1,4 +1,4 @@
-import 'package:mobile_store_driver/Model/model_index.dart';
+import 'package:mobile_store_driver/model/product.dart';
 
 class CartItemModel {
   Product product;

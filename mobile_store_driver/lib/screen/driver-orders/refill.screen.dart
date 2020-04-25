@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:mobile_store_driver/model/cart_item.dart';
+import 'package:mobile_store_driver/model/cart_model.dart';
 import 'package:mobile_store_driver/model/data_sample.dart';
 import 'package:mobile_store_driver/screen/driver-orders/submit_driver_screen.dart';
 

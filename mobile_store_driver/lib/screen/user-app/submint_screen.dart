@@ -58,7 +58,7 @@ class SubmintScreen extends StatelessWidget {
                       height: 15,
                     ),
                     Text(
-                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                      "Your order has been sucessfully places and will be processed very soon.",
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 14.0,
