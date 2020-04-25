@@ -222,7 +222,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
   }
 
   _launchURL() async {
-    const url = 'tel:+966555555555';
+    const url = 'tel:+966581144770';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -231,7 +231,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
   }
 
   void choiceAction(String choice) {
-    if (choice == Constants.STATUS_CANCELLED) {
+    if (choice == Constants.CANCEL_ORDER) {
       setState(() {
         Navigator.push(
           context,
