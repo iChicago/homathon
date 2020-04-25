@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobile_store_driver/constants.dart';
 import 'package:mobile_store_driver/model/cart_model.dart';
 import 'package:mobile_store_driver/model/driver/store_item.dart';
@@ -58,7 +59,8 @@ class RefillOrder {
       this.supplier,
       this.supplierRemarks,
       this.availabilityTime,
-      this.isStore = false});
+      this.isStore = false,
+      this.latLng});
 
   int orderId;
   double distance;
@@ -68,6 +70,7 @@ class RefillOrder {
   String supplierRemarks;
   DateTime availabilityTime;
   bool isStore;
+  LatLng latLng;
   List<StoreItem> storeItems = [];
 
   addDummyStoreItems(List<StoreItem> storeItems) {
@@ -112,5 +115,6 @@ class RefillOrder {
         ? 'We are open until 9 PM'
         : 'Conside calling before arrival';
     refillOrder.status = Constants.STATUS_APPROVED;
+    refillOrder.latLng = LatLng(24.703369, 46.651631);
   }
 }

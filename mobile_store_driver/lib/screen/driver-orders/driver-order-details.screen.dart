@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_store_driver/constants.dart';
 import 'package:mobile_store_driver/custom-component/status_component.dart';
+import 'package:mobile_store_driver/model/customer/order.dart';
 import 'package:mobile_store_driver/model/driver/refill_order.dart';
+import 'package:mobile_store_driver/screen/gmap/gmap.dart';
 
 import '../../constants.dart';
 
@@ -253,7 +255,18 @@ class DriverOrderDetailsPage extends StatelessWidget {
           flex: 1,
           child: RaisedButton.icon(
             elevation: 0.0,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GMap(
+                    order: Order(
+                        status: Constants.STATUS_IN_PROGRESS,
+                        latLng: this.refillOrder.latLng),
+                  ),
+                ),
+              );
+            },
             color: Color(0xffffd868),
             icon: Icon(
               Icons.map,
