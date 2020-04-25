@@ -40,6 +40,8 @@ class DriverOrdersPage extends StatelessWidget {
                 ),
                 Tab(icon: FaIcon(FontAwesomeIcons.store), text: 'Store Orders'),
               ],
+              indicatorColor: Color(0xffb80d57),
+              indicatorWeight: 4.0,
             ),
             title: Text('My Orders'),
             actions: <Widget>[

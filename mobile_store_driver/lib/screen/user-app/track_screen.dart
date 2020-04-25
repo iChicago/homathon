@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_store_driver/model/data_sample.dart';
 import 'package:mobile_store_driver/screen/user-app/home_screen.dart';
 
 class TrackScreen extends StatelessWidget {
@@ -34,7 +35,6 @@ class TrackScreen extends StatelessWidget {
                 Card(
                     elevation: 1.0,
                     child: Container(
-                      //height: MediaQuery.of(context).size.height / 2,
                       child: Center(
                         child: Padding(
                           padding: const EdgeInsets.all(25.0),
@@ -58,6 +58,7 @@ class TrackScreen extends StatelessWidget {
                                         Text(
                                           "Wed,12 Sep",
                                           style: TextStyle(
+                                              color: Color(0xff721b65),
                                               fontWeight: FontWeight.bold),
                                         ),
                                         SizedBox(
@@ -72,8 +73,9 @@ class TrackScreen extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    Text("Total: 354 SR",
+                                    Text("Total: ${DataSample.orderToral} SR",
                                         style: TextStyle(
+                                            color: Color(0xff721b65),
                                             fontWeight: FontWeight.bold)),
                                   ],
                                 ),
@@ -161,7 +163,7 @@ class TrackScreen extends StatelessWidget {
                                       height: 40,
                                       width: 40,
                                       decoration: BoxDecoration(
-                                          color: Color(0xfff8615a),
+                                          color: Color(0xffffd868),
                                           borderRadius:
                                               BorderRadius.circular(25)),
                                       child: Icon(
@@ -192,7 +194,7 @@ class TrackScreen extends StatelessWidget {
                                             Text(
                                               "Under processing",
                                               style: TextStyle(
-                                                color: Color(0xffb80d57),
+                                                color: Color(0xffffd868),
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
@@ -348,7 +350,7 @@ class TrackScreen extends StatelessWidget {
                               height: 40,
                               width: 40,
                               decoration: BoxDecoration(
-                                  color: Color(0xffffd868),
+                                  color: Color(0xff721b65),
                                   borderRadius: BorderRadius.circular(25)),
                               child: Icon(
                                 Icons.home,

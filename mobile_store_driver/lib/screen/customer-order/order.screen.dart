@@ -37,6 +37,7 @@ class _OrdersPageState extends State<OrdersPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: FaIcon(FontAwesomeIcons.store),
+        backgroundColor: Color(0xfff8615a),
         onPressed: () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => InventoryPage()));
@@ -123,7 +124,7 @@ class _OrdersPageState extends State<OrdersPage> {
                 new Text(
                   'Order# ${orders[index].orderId}',
                   style:
-                  new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      new TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 new Text(
                   '${orders[index].distance} km',

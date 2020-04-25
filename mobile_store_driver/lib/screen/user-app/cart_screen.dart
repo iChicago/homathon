@@ -36,8 +36,32 @@ class _CartScreenState extends State<CartScreen> {
     List<Widget> widgets = [];
 
     // Cart Items
-    DataSample.cartItems
-        .forEach((item) => widgets.add(getItemCard(cartItem: item)));
+    if (DataSample.cartItems.length == 0) {
+      widgets.add(Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Card(
+          color: Colors.white,
+          elevation: 1.0,
+          child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                children: <Widget>[
+                  Icon(Icons.shopping_cart, color: Color(0xff721b65)),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Text(
+                    "Your cart is empty..",
+                    style: TextStyle(color: Colors.grey),
+                  )
+                ],
+              )),
+        ),
+      ));
+    } else {
+      DataSample.cartItems
+          .forEach((item) => widgets.add(getItemCard(cartItem: item)));
+    }
     widgets.add(getCartTotalWidget());
     return widgets;
   }
@@ -49,7 +73,7 @@ class _CartScreenState extends State<CartScreen> {
         margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(8.0, 8.0, 2.0, 2.0),
+          padding: EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -154,27 +178,46 @@ class _CartScreenState extends State<CartScreen> {
               ),
               Row(
                 children: [
-                  Expanded(
-                    flex: 1,
-                    child: RaisedButton.icon(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    PaymentScreen()));
-                      },
-                      color: Color(0xffb80d57),
-                      icon: Icon(
-                        Icons.shopping_cart,
-                        color: Colors.white,
-                      ),
-                      label: Text(
-                        'Checkout',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                    ),
-                  )
+                  DataSample.cartItems.length == 0
+                      ? Expanded(
+                          flex: 1,
+                          child: RaisedButton.icon(
+                            onPressed: () {},
+                            color: Colors.grey,
+                            icon: Icon(
+                              Icons.shopping_cart,
+                              color: Colors.white,
+                            ),
+                            label: Text(
+                              'Checkout',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                          ),
+                        )
+                      : Expanded(
+                          flex: 1,
+                          child: RaisedButton.icon(
+                            onPressed: () {
+                              DataSample.orderToral = calculateOrderTotal();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          PaymentScreen()));
+                            },
+                            color: Color(0xff721b65),
+                            icon: Icon(
+                              Icons.shopping_cart,
+                              color: Colors.white,
+                            ),
+                            label: Text(
+                              'Checkout',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                          ),
+                        )
                 ],
               )
             ],
@@ -250,11 +293,10 @@ class _CartScreenState extends State<CartScreen> {
                     Text(
                       'SR ${cartItem.product.price}',
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xfff8615a),
-                          fontSize: 15,
-                          letterSpacing: 2,
-                          fontStyle: FontStyle.italic),
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xfff8615a),
+                        fontSize: 15,
+                      ),
                     )
                   ],
                 ),
@@ -284,9 +326,7 @@ class _CartScreenState extends State<CartScreen> {
                 flex: 0,
                 child: Text(
                   cartItem.quantity.toString(),
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
+                  style: TextStyle(fontSize: 20, color: Colors.grey),
                 ),
               ),
               Expanded(

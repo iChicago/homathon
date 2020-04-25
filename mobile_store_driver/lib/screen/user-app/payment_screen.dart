@@ -45,7 +45,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   order: createdOrder,
                                 )));
                   },
-                  color: Color(0xffb80d57),
+                  color: Color(0xff721b65),
                   child: Container(
                       alignment: Alignment.center,
                       width: MediaQuery.of(context).size.width,

@@ -222,7 +222,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     incressCartItem(cartItemModel);
                   });
                 },
-                color: Color(0xffb80d57),
+                color: Color(0xff721b65),
                 child: Icon(
                   Icons.add,
                   size: 20,
@@ -239,7 +239,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         builder: (context) => Center(
           child: RaisedButton(
             elevation: 0.0,
-            color: Color(0xffb80d57),
+            color: Color(0xff721b65),
             onPressed: () {
               Scaffold.of(context).showSnackBar(
                 SnackBar(

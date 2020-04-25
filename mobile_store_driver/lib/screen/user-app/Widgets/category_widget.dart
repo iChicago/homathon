@@ -22,7 +22,7 @@ class CategoryWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
       ),
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(8),
         child: Text(
           category.name,
           style: TextStyle(color: Colors.white, fontSize: 14),

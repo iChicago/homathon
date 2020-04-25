@@ -13,7 +13,7 @@ class DataSample {
     Category(index: 6, name: "Chocolates"),
     Category(index: 7, name: "Snacks"),
   ];
-
+  static double orderToral = 0;
   static final List<Product> cart = [];
   static final List<CartItemModel> cartItems = [];
   static final List<CartItemModel> refilItems = [
@@ -50,8 +50,7 @@ class DataSample {
         categoryc: 1,
         price: 5,
         stock: 50,
-        moreInfo:
-        "Sample infor about our product.",
+        moreInfo: "Sample infor about our product.",
         image: 'assets/images/bread.png'),
     Product(
         code: 3,
@@ -59,8 +58,7 @@ class DataSample {
         categoryc: 5,
         price: 8,
         stock: 40,
-        moreInfo:
-        "Sample infor about our product.",
+        moreInfo: "Sample infor about our product.",
         image: 'assets/images/cucumber.jpg'),
     Product(
         code: 4,
@@ -68,8 +66,7 @@ class DataSample {
         categoryc: 3,
         price: 10,
         stock: 80,
-        moreInfo:
-        "Sample infor about our product.",
+        moreInfo: "Sample infor about our product.",
         image: 'assets/images/milk.jpg'),
     Product(
         code: 5,
@@ -77,8 +74,7 @@ class DataSample {
         categoryc: 3,
         price: 10,
         stock: 80,
-        moreInfo:
-        "Sample infor about our product.",
+        moreInfo: "Sample infor about our product.",
         image: 'assets/images/milk1.png'),
     Product(
         code: 6,
@@ -86,8 +82,7 @@ class DataSample {
         categoryc: 3,
         price: 10,
         stock: 80,
-        moreInfo:
-        "Sample infor about our product.",
+        moreInfo: "Sample infor about our product.",
         image: 'assets/images/milk2.jpg'),
     Product(
         code: 7,
@@ -95,8 +90,7 @@ class DataSample {
         categoryc: 5,
         price: 25,
         stock: 40,
-        moreInfo:
-        "Sample infor about our product.",
+        moreInfo: "Sample infor about our product.",
         image: 'assets/images/tomatoes.jpg'),
     Product(
         code: 8,
@@ -104,8 +98,7 @@ class DataSample {
         categoryc: 3,
         price: 10,
         stock: 80,
-        moreInfo:
-        "Sample infor about our product.",
+        moreInfo: "Sample infor about our product.",
         image: 'assets/images/cheese1.jpg'),
     Product(
         code: 9,
@@ -113,8 +106,7 @@ class DataSample {
         categoryc: 3,
         price: 10,
         stock: 80,
-        moreInfo:
-        "Sample infor about our product.",
+        moreInfo: "Sample infor about our product.",
         image: 'assets/images/chees.jpg'),
     Product(
         code: 10,
@@ -122,8 +114,7 @@ class DataSample {
         categoryc: 3,
         price: 10,
         stock: 80,
-        moreInfo:
-        "Sample infor about our product.",
+        moreInfo: "Sample infor about our product.",
         image: 'assets/images/cheese1.jpg'),
     Product(
         code: 11,
@@ -131,8 +122,7 @@ class DataSample {
         categoryc: 5,
         price: 12,
         stock: 4,
-        moreInfo:
-        "Sample infor about our product.",
+        moreInfo: "Sample infor about our product.",
         image: 'assets/images/potatos.jpg'),
   ];
 }

@@ -71,7 +71,7 @@ class SubmintScreen extends StatelessWidget {
                       height: 50,
                     ),
                     RaisedButton(
-                        color: Color(0xffb80d57),
+                        color: Color(0xff721b65),
                         onPressed: () {
                           Navigator.push(
                               context,

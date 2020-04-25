@@ -38,6 +38,8 @@ class SuperMarketOrdersPage extends StatelessWidget {
                 ),
                 Tab(icon: FaIcon(FontAwesomeIcons.store), text: 'Store Orders'),
               ],
+              indicatorColor: Color(0xffffd868),
+              indicatorWeight: 4.0,
             ),
             title: Text('My Orders'),
           ),

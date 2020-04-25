@@ -30,6 +30,9 @@ class _MyHomePageState extends State<HomeScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
         title: Text(
           widget.title,
           style: TextStyle(color: Colors.white),
@@ -95,7 +98,7 @@ class _MyHomePageState extends State<HomeScreen> {
           ),
         ],
       ),
-      drawer: Drawer(),
+      drawer: Drawer(child: ListView()),
       body: ListView(
         children: <Widget>[
           Container(
