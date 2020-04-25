@@ -80,66 +80,96 @@ class DriverOrdersPage extends StatelessWidget {
     );
   }
 
-  static ListView buildRefillOrdersListView(isStore) {
+  static Widget buildRefillOrdersListView(isStore) {
     List<RefillOrder> orders = RefillOrder.driverRefillOrders;
-    return ListView.builder(
-      itemCount: orders.length,
-      itemBuilder: (BuildContext context, int index) {
-        final RefillOrder order = orders[index];
-        bool isStatusInProgress = order.status == Constants.STATUS_IN_PROGRESS;
-        return Column(
-          children: <Widget>[
-            new ListTile(
-              dense: true,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DriverOrderDetailsPage(),
-                    settings: RouteSettings(arguments: order),
-                  ),
-                );
-              },
-              title: new Card(
-                elevation: 1.5,
-                margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Row(children: [
-                    Expanded(
-                      flex: 5,
-                      child: Text('Order# ${order.orderId}',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontSize: 20, color: Color(0xff721b65))),
+    if (orders.length == 0) {
+      return Container(
+        height: 200,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Card(
+            color: Colors.white,
+            elevation: 1.0,
+            child: Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(Icons.assistant, color: Color(0xfff8615a)),
+                    SizedBox(
+                      height: 30,
                     ),
-                    Expanded(
-                      flex: 3,
-                      child: CircleAvatar(
-                        radius: 15,
-                        child: new Text(
-                          order.status,
-                          style: new TextStyle(
-                              color: isStatusInProgress
-                                  ? Colors.yellow[800]
-                                  : Colors.green,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15.0),
-                        ),
-                        backgroundColor: Colors.white,
+                    Text(
+                      "No refill order ",
+                      style: TextStyle(color: Colors.grey),
+                    )
+                  ],
+                )),
+          ),
+        ),
+      );
+    } else {
+      return ListView.builder(
+        itemCount: orders.length,
+        itemBuilder: (BuildContext context, int index) {
+          final RefillOrder order = orders[index];
+          bool isStatusInProgress =
+              order.status == Constants.STATUS_IN_PROGRESS;
+          return Column(
+            children: <Widget>[
+              new ListTile(
+                dense: true,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DriverOrderDetailsPage(),
+                      settings: RouteSettings(arguments: order),
+                    ),
+                  );
+                },
+                title: new Card(
+                  elevation: 1.5,
+                  margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Row(children: [
+                      Expanded(
+                        flex: 5,
+                        child: Text('Order# ${order.orderId}',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                fontSize: 20, color: Color(0xff721b65))),
                       ),
-                    ),
-                  ]),
+                      Expanded(
+                        flex: 3,
+                        child: CircleAvatar(
+                          radius: 15,
+                          child: new Text(
+                            order.status,
+                            style: new TextStyle(
+                                color: isStatusInProgress
+                                    ? Colors.yellow[800]
+                                    : Colors.green,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15.0),
+                          ),
+                          backgroundColor: Colors.white,
+                        ),
+                      ),
+                    ]),
+                  ),
                 ),
               ),
-            ),
 //            Divider(
 //              height: 10.0,
 //            ),
-          ],
-        );
-      },
-    );
+            ],
+          );
+        },
+      );
+    }
   }
 }
