@@ -49,7 +49,7 @@ class Order {
         distance: 2.5,
         deliveryFees: 10,
         address: ' 1234, King Fahd rd, Olaya ');
-    customerOrder.latLng = LatLng(46.672164, 24.714007);
+    customerOrder.latLng = LatLng(24.714007, 46.672164);
     double itemTotal = 0;
     DataSample.cartItems.forEach((cartItem) {
       Item storeItem = Item(

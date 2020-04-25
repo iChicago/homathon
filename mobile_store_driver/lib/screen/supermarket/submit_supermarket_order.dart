@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_store_driver/model/driver/refill_order.dart';
 import 'package:mobile_store_driver/screen/supermarket/supermarket_orders.dart';
 
 import '../../constants.dart';
 
 class SubmitStoreScreen extends StatelessWidget {
+  SubmitStoreScreen({@required this.order});
+
+  RefillOrder order;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,13 +38,13 @@ class SubmitStoreScreen extends StatelessWidget {
                     Text(
                       "Thank you",
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                     SizedBox(
                       height: 15,
                     ),
                     Text(
-                      "Order #10024445",
+                      "Order #${order.orderId}",
                       style: TextStyle(
                         color: Color(0xffb80d57),
                       ),
@@ -48,7 +53,7 @@ class SubmitStoreScreen extends StatelessWidget {
                       height: 15,
                     ),
                     Text(
-                      "Thank for approving the request.",
+                      "Thanks for approving the request.",
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 14.0,

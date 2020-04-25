@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_store_driver/model/driver/refill_order.dart';
 
 import '../../constants.dart';
 import 'driver_orders.screen.dart';
 
 class SubmitDriverScreen extends StatelessWidget {
+  SubmitDriverScreen({@required this.order});
+
+  RefillOrder order;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +42,7 @@ class SubmitDriverScreen extends StatelessWidget {
                       height: 15,
                     ),
                     Text(
-                      "Order #10024445",
+                      "Order# ${this.order.orderId}",
                       style: TextStyle(
                         color: Color(0xffb80d57),
                       ),

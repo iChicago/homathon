@@ -30,7 +30,8 @@ class RefillOrder {
     todayStoreOrder.status = Constants.STATUS_IN_PROGRESS;
   }
 
-  static createRefillOrder(List<CartItemModel> cartItems, int totalItems) {
+  static RefillOrder createRefillOrder(
+      List<CartItemModel> cartItems, int totalItems) {
     RefillOrder refillOrder = RefillOrder(
       orderId: Random().nextInt(100),
       status: Random().nextBool()
@@ -48,6 +49,7 @@ class RefillOrder {
     refillOrder.itemsTotal = totalItems;
     refillOrder.status = Constants.STATUS_IN_PROGRESS;
     driverRefillOrders.add(refillOrder);
+    return refillOrder;
   }
 
   RefillOrder(

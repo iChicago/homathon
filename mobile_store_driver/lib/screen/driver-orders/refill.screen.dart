@@ -116,13 +116,16 @@ class _RefillDriverScreenState extends State<RefillPage> {
                     flex: 1,
                     child: RaisedButton.icon(
                       onPressed: () {
-                        RefillOrder.createRefillOrder(
-                            DataSample.refilItems, totalItems);
+                        RefillOrder createdRefillOrder =
+                            RefillOrder.createRefillOrder(
+                                DataSample.refilItems, totalItems);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    SubmitDriverScreen()));
+                                    SubmitDriverScreen(
+                                      order: createdRefillOrder,
+                                    )));
                       },
                       color: Color(0xffb80d57),
                       icon: Icon(

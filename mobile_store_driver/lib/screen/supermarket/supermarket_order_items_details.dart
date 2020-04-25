@@ -182,8 +182,9 @@ class _StoreKeeperState extends State<StoreKeeper> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            SubmitStoreScreen()));
+                        builder: (BuildContext context) => SubmitStoreScreen(
+                              order: this.refillOrder,
+                            )));
               },
               color: Color(0xffb80d57),
               icon: Icon(

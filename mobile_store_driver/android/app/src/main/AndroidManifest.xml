@@ -7,9 +7,9 @@
          additional functionality it is fine to subclass or reimplement
          FlutterApplication and put your custom class here. -->
     <application
-        android:name="io.flutter.app.FlutterApplication"
-        android:label="mobile_store_driver"
-        android:icon="@mipmap/ic_launcher">
+            android:name="io.flutter.app.FlutterApplication"
+            android:label="Goot"
+            android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyDe9j5NYfvi4vHJ9apx-ONhlz2Jvy4cG3I"/>
         <activity
