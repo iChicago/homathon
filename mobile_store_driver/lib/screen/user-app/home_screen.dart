@@ -18,6 +18,11 @@ class _MyHomePageState extends State<HomeScreen> {
   int categoryCode = 0;
   List<Product> products = [];
 
+  /// called from the child components to update cart total items
+  refresh() {
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -129,6 +134,7 @@ class _MyHomePageState extends State<HomeScreen> {
                 ),
                 GridViewWidget(
                   products: products,
+                  notifyParent: this.refresh,
                 ),
               ]),
             ),

@@ -6,14 +6,22 @@ import 'package:mobile_store_driver/screen/user-app/index.dart';
 
 class GridViewWidget extends StatefulWidget {
   final List<Product> products;
+  var _gridViewWidgetState;
 
-  GridViewWidget({@required this.products});
+  GridViewWidget({@required this.products, @required notifyParent}) {
+    _gridViewWidgetState = _GridViewWidgetState(notifyParent: notifyParent);
+  }
 
   @override
-  _GridViewWidgetState createState() => _GridViewWidgetState();
+  _GridViewWidgetState createState() => _gridViewWidgetState;
 }
 
 class _GridViewWidgetState extends State<GridViewWidget> {
+  _GridViewWidgetState({this.notifyParent});
+
+  // reference to notify method to be executed in parent when needed
+  var notifyParent;
+
   @override
   Widget build(BuildContext context) {
     final double itemHeight =
@@ -46,8 +54,8 @@ class _GridViewWidgetState extends State<GridViewWidget> {
             context,
             MaterialPageRoute(
                 builder: (BuildContext context) => ProductDetailsScreen(
-                      product: product,
-                    )));
+                  product: product,
+                )));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -104,6 +112,7 @@ class _GridViewWidgetState extends State<GridViewWidget> {
         DataSample.cartItems.add(CartItemModel(product: product, quantity: 1));
       }
     }
+    this.notifyParent();
   }
 
   void removeCartItem(CartItemModel cartItem) {
@@ -112,6 +121,7 @@ class _GridViewWidgetState extends State<GridViewWidget> {
         DataSample.cartItems[i].quantity--;
       }
     }
+    this.notifyParent();
   }
 
   void incressCartItem(CartItemModel cartItem) {
@@ -120,10 +130,12 @@ class _GridViewWidgetState extends State<GridViewWidget> {
         DataSample.cartItems[i].quantity++;
       }
     }
+    this.notifyParent();
   }
 
   void removeFromCart(CartItemModel cartItem) {
     DataSample.cartItems.remove(cartItem);
+    this.notifyParent();
   }
 
   Widget addButton({Product product}) {
