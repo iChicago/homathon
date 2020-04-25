@@ -51,7 +51,7 @@ class _OrdersPageState extends State<OrdersPage> {
           child: Center(
             child: Stack(
               children: <Widget>[
-                new Icon(Icons.home),
+                new Icon(Icons.store),
                 new Positioned(
                   right: 0,
                   child: new Container(
