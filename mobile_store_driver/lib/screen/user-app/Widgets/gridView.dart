@@ -188,7 +188,7 @@ class _GridViewWidgetState extends State<GridViewWidget> {
                     incressCartItem(cartItemModel);
                   });
                 },
-                color: Color(0xffb80d57),
+                color: Color(0xff721b65),
                 child: Icon(
                   Icons.add,
                   size: 20,
@@ -205,7 +205,7 @@ class _GridViewWidgetState extends State<GridViewWidget> {
         builder: (context) => Center(
           child: RaisedButton(
             elevation: 0.0,
-            color: Color(0xffb80d57),
+            color: Color(0xff721b65),
             onPressed: () {
               Scaffold.of(context).showSnackBar(
                 SnackBar(
@@ -220,9 +220,8 @@ class _GridViewWidgetState extends State<GridViewWidget> {
                   ),
                 ),
               );
-              setState(() {
-                addProductInCart(product: product);
-              });
+              addProductInCart(product: product);
+              setState(() {});
             },
             child: Padding(
               padding: EdgeInsets.all(5),
