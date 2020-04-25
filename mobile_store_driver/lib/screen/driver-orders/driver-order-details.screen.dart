@@ -110,19 +110,20 @@ class DriverOrderDetailsPage extends StatelessWidget {
     if (Constants.STATUS_APPROVED == this.refillOrder.status ||
         Constants.STATUS_DELIVERED == this.refillOrder.status) {
       return Card(
-        color: Colors.amber[50],
+        elevation: 1.0,
+        color: Colors.white,
         margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(8.0, 8.0, 2.0, 2.0),
+          padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
                 refillOrder.isStore ? 'Store Details' : 'Supplier Details',
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                ),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Color(0xffb80d57)),
               ),
               SizedBox(height: 5),
               supplierName(),
@@ -136,9 +137,9 @@ class DriverOrderDetailsPage extends StatelessWidget {
               Text(
                 'Address',
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                ),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Color(0xfff8615a)),
               ),
               orderAddress(),
               SizedBox(height: 20),
@@ -160,7 +161,7 @@ class DriverOrderDetailsPage extends StatelessWidget {
           flex: 5,
           child: Text(
             'Name',
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 18, color: Colors.grey),
           ),
         ),
         Expanded(
@@ -168,8 +169,8 @@ class DriverOrderDetailsPage extends StatelessWidget {
           child: Text(
             this.refillOrder.supplier.name,
             style: TextStyle(
-              fontSize: 20,
-              color: Colors.black,
+              fontSize: 18,
+              color: Color(0xff721b65),
             ),
           ),
         )
@@ -185,7 +186,7 @@ class DriverOrderDetailsPage extends StatelessWidget {
             flex: 5,
             child: Text(
               'Availability Time',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 18, color: Colors.grey),
             ),
           ),
           Expanded(
@@ -194,9 +195,9 @@ class DriverOrderDetailsPage extends StatelessWidget {
               DateFormat("dd-MM-yyyy hh:mm aaa")
                   .format(this.refillOrder.availabilityTime),
               style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.blue[700],
-                  fontWeight: FontWeight.bold),
+                fontSize: 16,
+                color: Colors.grey,
+              ),
             ),
           )
         ],
@@ -213,7 +214,7 @@ class DriverOrderDetailsPage extends StatelessWidget {
           flex: 5,
           child: Text(
             'Remarks',
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 18, color: Colors.grey),
           ),
         ),
         Expanded(
@@ -221,9 +222,8 @@ class DriverOrderDetailsPage extends StatelessWidget {
           child: Text(
             this.refillOrder.supplierRemarks,
             style: TextStyle(
-              fontSize: 20,
-              color: Colors.brown[700],
-              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: Colors.grey,
             ),
           ),
         )
@@ -239,7 +239,7 @@ class DriverOrderDetailsPage extends StatelessWidget {
           flex: 5,
           child: Text(
             refillOrder.supplier.address,
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 18, color: Colors.grey),
           ),
         ),
       ],
@@ -252,9 +252,13 @@ class DriverOrderDetailsPage extends StatelessWidget {
         Expanded(
           flex: 1,
           child: RaisedButton.icon(
+            elevation: 0.0,
             onPressed: () {},
-            color: Colors.green[500],
-            icon: Icon(Icons.map),
+            color: Color(0xffffd868),
+            icon: Icon(
+              Icons.map,
+              color: Colors.white,
+            ),
             label: Text(
               'Map',
               style: TextStyle(
@@ -267,9 +271,13 @@ class DriverOrderDetailsPage extends StatelessWidget {
         Expanded(
           flex: 1,
           child: RaisedButton.icon(
+            elevation: 0.0,
             onPressed: () {},
-            color: Colors.blue,
-            icon: Icon(Icons.phone),
+            color: Color(0xfff8615a),
+            icon: Icon(
+              Icons.phone,
+              color: Colors.white,
+            ),
             label: Text(
               'Call',
               style: TextStyle(
